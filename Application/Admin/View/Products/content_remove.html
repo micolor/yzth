@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<include file="Common:cssjs2" />
+</head>
+<body>
+<script language="javascript" type="text/javascript" src="/st/js/cookie.js"></script>
+<div class="pad-10">
+
+<div class="content-menu ib-a blue line-x"><a href="#" class=on><em>批量转移</em></a> 
+</div>
+<div class="bk10"></div>
+<form action="{:U('Admin/New/remove')}" method="post" name="myform">
+<div class="table-list">
+<table width="100%" cellspacing="0">
+<thead>
+<tr>
+<th align="center" width="50%">指定来源</th>
+<th align="center" width="50%">目标栏目</th>
+</tr>
+</thead>
+<tbody  height="200" class="nHover td-line">
+	<tr> 
+      <td align="center" rowspan="6">
+		<input type="radio" name="fromtype" value="0" checked  id="fromtype_1" >从指定ID：
+		<input type="radio" name="fromtype" value="1"  id="fromtype_2" >从指定栏目
+		<div id="frombox_1" style="display:;">
+		<textarea name="ids" style="height:280px;width:350px;"> {$ids}</textarea>
+		<br/>
+		从指定ID
+		</div>
+		<div id="frombox_2" style="display:none;">
+		<select name="fromid[]" id="fromid"  multiple  style="height:300px;width:350px;">
+		<option value='0' style="background:#F1F3F5;color:blue;">从指定目标</option>
+		 {$html}
+		</select>
+		<br>
+		<font color="red">Tips:</font>多个问题ID请用','隔开，注意不要换行
+		</div>
+	</td>
+    </tr>
+	<tr> 
+      <td align="center" rowspan="6"><br>
+      <select name="tocatid" id="tocatid"  size="2"  style="height:300px;width:350px;">
+<option value='0' style="background:#F1F3F5;color:blue;">目标栏目</option>
+ {$html}
+</select>
+	</td>
+    </tr>
+	</tbody>
+
+</table>
+
+</div>
+<div class="btn">
+<input type="hidden" name="catid" value="<?php echo $_GET[catid]?>" />
+<input type="submit" class="button" value="提交" name="dosubmit"/>
+</div>
+</form>
+</div>
+<script LANGUAGE="JavaScript">
+$(function(){
+$('#fromtype_1').click(function(){
+
+$('#frombox_1').show();
+$('#frombox_2').hide();
+});
+
+$('#fromtype_2').click(function(){
+$('#frombox_1').hide();
+$('#frombox_2').show();
+});
+});
+
+</script>
+</body>
+</html>

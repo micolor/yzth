@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>分类管理</title>
+	<meta name="keywords" content="分类管理">
+	<meta name="description" content="分类管理">
+	<include file="Common:Tablecss" />
+	<link href="/statics/Hplus/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>分类管理</h5>
+					<div class="ibox-tools">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+							<i class="fa fa-wrench"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li><a href="{:U('Productscat/add')}">添加分类</a>
+							</li>
+						</ul>
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+					</div>
+				</div>
+				<div class="ibox-content">
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th width="5%">
+									<div class="icheckbox_square-green" style="position: relative;" id="checkall">
+										<input type="checkbox" style="position: absolute; opacity: 0;">
+										<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+									</div>
+								</th>
+								<th width="10%" align="left">排序</th>
+								<th width="30%">分类名称</th>
+								<th width="30%">是否展示</th>
+								<th width="30%">管理操作</th>
+							</tr>
+							</thead>
+							<tbody>
+							<form name="myform" action="{:U('Productscat/listorders')}" method="post">
+							<?php
+							if(is_array($data)){
+								foreach($data as $cate){
+							?>
+							<tr>
+								<td align="left">
+									<div class="icheckbox_square-green" style="position: relative;">
+										<input type="checkbox" name="aid[]" value="{$cate.cate_id}" style="position: absolute; opacity: 0;">
+										<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+									</div>
+								</td>
+								<td align="left"><input name='listorders[<?php echo $cate['cate_id']?>]' type='text' size='3' value='<?php echo $cate['sort_order']?>' class='form-control input-sm input-listorder'></td>
+								<td align="left" style=" color:#900; font-size:14px; font-weight:bold;"><?php echo $cate['cate_name']?></td>
+								<td>
+									<if condition="$cate['is_show'] eq 1">
+										<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+										<else />
+										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+									</if>
+								</td>
+								<td align="left">
+									<!--<a href="{:U('Productscat/add',array('cate_id'=>$cate['cate_id']))}">添加下级分类</a> |-->
+									<a href="{:U('Productscat/edit',array('cate_id'=>$cate['cate_id']))}">修改</a> |
+									<a href="{:U('Productscat/delete',array('cate_id'=>$cate['cate_id']))}" onclick="Delete(this);return false;">删除</a>
+								</td>
+							</tr>
+							<?php foreach($cate[child] as $child1){?>
+							<tr>
+								<td align="left">
+									<div class="icheckbox_square-green" style="position: relative;">
+										<input type="checkbox" name="aid[]" value="<?php echo $child1['cate_id']?>" style="position: absolute; opacity: 0;">
+										<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+									</div>
+								</td>
+								<td align="left"><input name='listorders[<?php echo $child1['cate_id']?>]' type='text' size='3' value='<?php echo $child1['sort_order']?>' class='form-control input-sm input-listorder'></td>
+								<td align="left" style="color:#F00 ;font-size:13px; font-weight:bold;">&nbsp;&nbsp;├ <?php echo $child1['cate_name']?></td>
+								<td>
+									<if condition="$cate['is_show'] eq 1">
+										<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+										<else />
+										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+									</if>
+								</td>
+								<td align="left">
+									<a href="/Admin/Productscat/add/cate_id/<?php echo $child1['cate_id']?>.html">添加下级分类</a> |
+									<a href="/Admin/Productscat/edit/cate_id/<?php echo $child1['cate_id']?>.html">修改</a> |
+									<a href="/Admin/Productscat/delete/cate_id/<?php echo $child1['cate_id']?>" onclick="Delete(this);return false;">删除</a>
+								</td>
+							</tr>
+							<?php foreach($child1[child] as $child2){?>
+							<tr>
+								<td align="left">
+									<div class="icheckbox_square-green" style="position: relative;">
+										<input type="checkbox" name="aid[]" value="<?php echo $child2['cate_id']?>" style="position: absolute; opacity: 0;">
+										<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+									</div>
+								</td>
+								<td align="left"><input name='listorders[<?php echo $child2['cate_id']?>]' type='text' size='3' value='<?php echo $child2['sort_order']?>' class='form-control input-sm'></td>
+								<td align="left" style="color:#990;font-size:12px; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ <?php echo $child2['cate_name']?></td>
+
+								<td align="left">
+									<a href="/Admin/Productscat/edit/cate_id/<?php echo $child2['cate_id']?>.html">修改</a> |
+									<a href="/Admin/Productscat/delete/cate_id/<?php echo $child2['cate_id']?>" onclick="Delete(this);return false;">删除</a>
+								</td>
+							</tr>
+							<?php }?>
+							<?php }?>
+
+							<?php
+								}
+							}
+							?>
+							</form>
+							</tbody>
+						</table>
+						<div style="width:100%;margin-top: -20px;">
+							<input type="button" class="btn btn-primary J_ajax_submit_btn" style="width:100px;background-color: #ED5565;border-color: #ED5565;" onclick="datadel()" value="批量删除" />
+							<input type="submit" class="btn btn-primary J_ajax_submit_btn" name="dosubmit" value="排序" onClick="document.myform.action='{:U("Productscat/listorders")}';myform.submit();" />
+						</div>
+						{$page}
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+<include file="Common:Tablejs" />
+</body>
+</html>
+<script type="text/javascript">
+	var Delete = function(t){
+		layer.confirm('确认要删除吗？',function(index){
+			location.href=t;
+		});
+	}
+
+	$(function(){
+
+		$(".icheckbox_square-green").click(function(){
+			// 判断是否是全选checkbox 1 是 设置所有checkbox  2 否 设置单个checkbox
+			if($(this).attr("id") == "checkall"){
+				if(typeof($(this).find("input[type=checkbox]").attr("checked")) == "undefined"){
+					$(".icheckbox_square-green").addClass("checked");
+					$("input[type=checkbox]").attr("checked","checked");
+				}else{
+					$(".icheckbox_square-green").removeClass("checked");
+					$("input[type=checkbox]").removeAttr("checked");
+				}
+			}else{
+				if(typeof($(this).find("input[type=checkbox]").attr("checked")) == "undefined"){
+					$(this).addClass("checked");
+					$(this).find("input[type=checkbox]").attr("checked","checked");
+				}else{
+					$(this).removeClass("checked");
+					$(this).find("input[type=checkbox]").removeAttr("checked");
+				}
+			}
+		});
+
+	});
+
+	/*批量删除*/
+	function datadel(){
+		layer.confirm('确认要删除吗？',function(index){
+			var chk_value =[];
+			$('input[name="aid[]"]:checked').each(function(){
+				chk_value.push($(this).val());
+			});
+			if($('input[name="aid[]"]:checked').length==0){
+				layer.msg('未选取任何内容', {icon:1,time:1000});
+			}else{
+				$.post(
+						'/Admin/Productscat/delete.html',
+						{cate_id:chk_value},
+						function(data){
+							if(data.status == 1){
+								window.location.reload();
+								$('input[name="aid[]"]').removeAttr("checked");
+								layer.msg('删除成功', {icon:1,time:2000});
+							}else{
+								layer.msg(data.info, {icon:1,time:2000});
+							}
+						}
+
+				);
+			}
+		});
+	}
+
+</script>

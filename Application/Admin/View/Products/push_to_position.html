@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<include file="Common:cssjs2" />
+</head>
+<script language="javascript" type="text/javascript" src="/st/js/cookie.js"></script>
+
+<body>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){
+		$.formValidator.initConfig({formid:"myform",autotip:true,onerror:function(msg,obj){window.top.art.dialog({content:msg,lock:true,width:'200',height:'50'}, function(){this.close();$(obj).focus();})}});
+		<?php if (is_array($html) && $html['validator']){ echo $html['validator']; unset($html['validator']); }?>
+	})
+//-->
+</script>
+<div class="pad-10">
+<div class="col-tab">
+
+<ul class="tabBut cu-li">
+<li><a href="javascript:;">推送到推荐位</a></li>
+</ul>
+ 
+<div class='content' style="height:auto;">
+<form action="/index.php?m=Admin&c=New&a=push_add" method="post" name="myform" id="myform">
+<input type="hidden" name="id" value="<?php echo $_GET[id];?>">
+<input type="hidden" name="catid" value="<?php echo $_GET[catid];?>">
+
+
+</div>
+</div>
+    <div style="width:400px; padding:2px; border:1px solid #d8d8d8; float:left; margin-top:10px; margin-right:10px">
+    <table width="100%" cellspacing="0" class="table-list" >
+            <thead>
+                <tr>
+                <th width="100">推荐位ID</th>
+                <th align="left">推荐位名称</th>
+               
+                </tr>
+            </thead>
+        <tbody>
+        <?php echo $html;?>
+                </tbody>
+        </table>
+    </div>
+ 
+    <div style="overflow:hidden;_float:left;margin-top:10px;*margin-top:0;_margin-top:0">
+    <fieldset>
+        <legend>已选推荐位</legend>
+    <ul class='list-dot-othors' id='catname'>
+    <input type='hidden' name='ids' value="" id="relation"></ul>
+    </fieldset>
+    </div>
+</div>
+<style type="text/css"> 
+.line_ff9966,.line_ff9966:hover td{background-color:#FF9966}
+.line_fbffe4,.line_fbffe4:hover td {background-color:#fbffe4}
+.list-dot-othors li{float:none; width:auto}
+</style>
+ 
+<div class="bk15"></div>
+ 
+<input type="hidden" name="return" value="" />
+<input type="submit" class="dialog" id="dosubmit" name="dosubmit" value="提交" />
+</form>
+ 
+<SCRIPT LANGUAGE="JavaScript"> 
+<!--
+
+	function select_list(obj,title,id) {
+		var relation_ids= $('#relation').val();
+		var sid = 'v'+id;
+		var arr;
+		var str ;
+		var blog=true;
+		$(obj).attr('class','line_fbffe4');
+		if(relation_ids =='' ) {
+			$('#relation').val('|'+id);
+			str= "<li id='"+sid+"' cid='"+id+"' class='ct'>·<span>"+title+"</span><a href='javascript:;' class='close' onclick=\"remove_id('"+sid+"')\"></a></li>";
+		$('#catname').append(str);
+			relation_ids= $('#relation').val();
+		} else {
+			
+			     arr=relation_ids.split('|');
+				for(var i=1;i<arr.length;i++){	
+					if(arr[i]==id)blog=false;
+				}
+				if(blog){
+				relation_ids = relation_ids+'|'+id;
+			str = "<li id='"+sid+"' cid='"+id+"' class='ct'>·<span>"+title+"</span><a href='javascript:;' class='close' onclick=\"remove_id('"+sid+"')\"></a></li>";
+		$('#catname').append(str);
+				
+				}	
+			$('#relation').val(relation_ids);
+			//alert($('#relation').val());
+			
+		}
+		
+}
+ 
+//移除ID
+function remove_id(id) {
+	var rel='';
+	$('#'+id).remove();
+	$('.ct').each(function(){
+		rel = rel+'|'+$(this).attr("cid");				   				   		
+});
+	
+		$('#relation').val(rel);	
+}
+
+
+//-->
+</SCRIPT>

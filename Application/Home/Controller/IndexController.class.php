@@ -30,7 +30,7 @@ class IndexController extends BaseController {
         $where = "link_static = '1'";
         $partner = $this->Partner->where($where)->order(array("link_order"=>"asc","link_add_time"=>"desc"))->select();
         $this->assign('partner', $partner);
-        //新闻中心
+        //新闻资讯
         $where = "catid = '7' and status = '1'";
         $news = $this->News->where($where)->order(array("listorder"=>"asc","edittime"=>"desc"))->limit(2)->select();
         $this->assign('news', $news);
