@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+<head>
+	<include file="Common:Formcss" />
+	<link rel="stylesheet" href="/Public/kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" href="/Public/kindeditor/plugins/code/prettify.css" />
+	<script charset="utf-8" src="/Public/kindeditor/kindeditor-min.js"></script>
+	<link href="/statics/Hplus/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5><if condition="$info['jid'] neq null">修改<else/>添加</if>职位</h5>
+					<div class="ibox-tools">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+							<i class="fa fa-wrench"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li><a href="{:U('Jobs/index')}">返回招贤纳士</a>
+							</li>
+							</li>
+						</ul>
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+					</div>
+				</div>
+				<div style="display: block;" class="ibox-content">
+					<form novalidate="novalidate" class="form-horizontal m-t" id="myform" action="" method="post">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">职位名称</label>
+							<div class="col-sm-10  control">
+								<input type="text" name="title" class="form-control" id="title" value="{$info.title}">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">招聘人数</label>
+							<div class="col-sm-10  control">
+								<input type="text" name="people" class="form-control" id="people" value="{$info.people}">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">工作地点</label>
+							<div class="col-sm-10  control">
+								<input type="text" name="address" class="form-control" id="address" value="{$info.address}">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">招聘简介</label>
+							<div class="col-sm-10  control">
+								<input type="text" name="ndesc" class="form-control" id="ndesc" value="{$info.ndesc}">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">招聘内容</label>
+							<div class="col-sm-10  control">
+								<textarea name='content' id="content" style="width:637px; height:400px; max-width:637px;resize:none;">{$info.detail}</textarea>
+								<script>
+									KindEditor.ready(function(K) {
+										K.create('textarea[name="content"]', {
+											autoHeightMode : true,
+											resizeType:1,
+											afterCreate : function() {
+												this.loadPlugin('autoheight');
+											},
+											items :['source', '|', 'fullscreen', 'undo', 'redo', 'print', 'cut', 'copy', 'paste',
+												'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+												'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|', 'selectall',
+												'title', 'fontname', 'fontsize', 'textcolor', 'bgcolor', 'bold','-',
+												'italic', 'underline', 'strikethrough', 'removeformat', '|', 'image','multiimage',
+												'advtable', 'table', 'pagebreak', 'clearhtml','template','quickformat','link', 'unlink','media','flash']
+										});
+									});
+								</script>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">更新时间</label>
+							<div class="col-sm-10  control">
+								<div class="inline" style="width: 82%" id="data">
+									<div class="input-daterange input-group" id="datepicker">
+										<input class="input-sm form-control" name="edittime" value="{$info.edittime|date='Y-m-d',###}" type="text">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">是否发布</label>
+							<div class="col-sm-10  control">
+
+								<div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="fabu_yes">
+									<input type="radio" style="position: absolute; opacity: 0;">
+									<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+								</div><i></i>是
+
+								<div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="fabu_no">
+									<input type="radio" style="position: absolute; opacity: 0;">
+									<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+								</div><i></i>否
+
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-2">
+								<input type="hidden" name="jid" value="{$info.jid}" />
+								<input type="hidden" name="cacheym" value="{$info.cacheym}" />
+								<input type="hidden" name="status" id="status" value="{$info.status}" />
+								<input name="dosubmit" type="submit" value="提交"  class="btn btn-primary" id="dosubmit">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Common:Formjs" />
+<script src="/statics/Hplus/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="/statics/Hplus/js/plugins/cropper/cropper.min.js"></script>
+</body>
+</html>
+<script>
+	$.validator.setDefaults({
+		highlight: function (element) {
+			$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		},
+		success: function (element) {
+			element.closest('.form-group').removeClass('has-error').addClass('has-success');
+		},
+		errorElement: "span",
+		errorPlacement: function (error, element) {
+			if (element.is(":radio") || element.is(":checkbox")) {
+				error.appendTo(element.parent().parent().parent());
+			} else {
+				error.appendTo(element.parent());
+			}
+		},
+		errorClass: "help-block m-b-none",
+		validClass: "help-block m-b-none"
+	});
+
+	// 正整数验证
+	jQuery.validator.addMethod("isBiggerThanZero", function(value, element) {
+		return this.optional(element) || /^[1-9]\d*$/.test(value);
+	}, "只能输入正整数");
+
+	$(function () {
+// validate signup form on keyup and submit
+		var icon = "<i class='fa fa-times-circle'></i> ";
+		$("#myform").validate({
+			rules: {
+				title:{
+					required: true,
+					minlength:1,
+					maxlength: 33
+				},
+				people:{
+					required: true,
+					isBiggerThanZero: true
+				}
+			},
+			messages: {
+				title:{
+					required: icon + "请输入职位名称",
+					minlength:icon + "职位名称不能为空",
+					maxlength: icon + "职位名称超过长度限制"
+				},
+				people:{
+					required: icon + "请输入招聘人数",
+					isBiggerThanZero: icon + "请输入正整数"
+				}
+			}
+		});
+
+	});
+
+	$(function() {
+
+		var status = $("#status").val();
+		if (status == 1) {
+
+			$("#fabu_yes").addClass("checked");
+			$("#fabu_yes").find("input[type=radio]").attr("checked", "");
+		} else {
+			$("#fabu_no").addClass("checked");
+			$("#fabu_no").find("input[type=radio]").attr("checked", "");
+		}
+
+		$("#fabu_yes").click(function () {
+			$(this).addClass("checked");
+			$(this).find("input[type=radio]").attr("checked", "checked");
+
+			$("#fabu_no").removeClass("checked");
+			$("#fabu_no").find("input[type=radio]").removeAttr("checked");
+			$("#status").val(1);
+
+		});
+
+		$("#fabu_no").click(function () {
+			$(this).addClass("checked");
+			$(this).find("input[type=radio]").attr("checked", "checked");
+
+			$("#fabu_yes").removeClass("checked");
+			$("#fabu_yes").find("input[type=radio]").removeAttr("checked");
+			$("#status").val(2);
+		});
+
+	});
+
+	$('#data .input-daterange').datepicker({
+		keyboardNavigation: false,
+		forceParse: false,
+		autoclose: true
+	});
+
+
+
+</script>

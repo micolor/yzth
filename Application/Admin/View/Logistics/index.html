@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<include file="Common:cssjs" />
+</head>
+<body>
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"> <a href='javascript:;' class="on"><em>物流公司管理</em></a><span>|</span><a href='{:U("Logistics/add")}' ><em>添加物流公司</em></a> </div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="pad_10" >
+  <div class="table-list" id="load_priv">
+     <form name="myform" action="" method="post" id="myform">
+      <table width="100%" cellspacing="0" id="dnd-example">
+    <thead>
+      <tr>
+       <th width="35"><input type="checkbox" value="" id="check_box" onclick="selectall('lid[]');"></th>
+       <th align="center" width="40">LID</th>
+       <th width='250' align="center">公司名称</th>
+       <th width='100' align="center">联系人</th>
+       <th width="120" align="center">联系人电话</th>
+       <th width="200" align='center'>添加时间</th>
+       <th align="center">状态</th>
+       <th width="150" align="center">管理操作</th>
+      </tr>
+    </thead>
+        <tbody>
+        <if condition="(!$datas)"><tr><td colspan="10">暂无数据</td></tr></if>
+        <foreach name="datas" item="li">
+        <tr>
+        	<td align="center"><input type="checkbox" name="lid[]" value="{$li.lid}"></td>         
+       		<td align='center'>{$li.lid}</td>
+       		<td align='center'>{$li.lcompany}</td>
+       		<td align='center'>{$li.llinkman}</td>
+            <td align="center">{$li.llinktel}</td>
+            <td align='center'>{$li.laddtime|date="Y-m-d H:i:s",###}</td>
+            <td align='center'>{$li.htmlstatus}</td>
+            <td align='center'>
+            <a href="{:U('Logistics/edit',array('lid'=>$li['lid']))}">修改</a> | 
+            <a href="javascript:confirmurl('{:U('Logistics/delete',array('lid'=>$li['lid']))}','确定删除该物流公司！');">删除</a>
+            </td>
+        </tr>
+        </foreach>
+         <tr>
+            <td align="left" height="25" colspan="10"><label for="check_box">全选/取消</label>
+			<input type="submit" class="button" value="删除选定的物流公司" onclick="document.myform.action='{:U("Logistics/delete")}';return confirm('确定执行批量删除？');"/></td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="pages">{$page}</div>
+ </form>
+  </div>
+</div>
+</body>
+</html>

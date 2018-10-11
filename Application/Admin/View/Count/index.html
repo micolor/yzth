@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<include file="Common:cssjs" />
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<link rel="stylesheet" type="text/css" href="/statics/js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="/statics/js/calendar/border-radius.css"/>
+<link rel="stylesheet" type="text/css" href="/statics/js/calendar/win2k.css"/>
+<script type="text/javascript" src="/statics/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="/statics/js/calendar/lang/en.js"></script>
+
+<div class="pad-lr-10">
+  <form name="searchform" action="/index.php" method="get" class="well form-search" >
+    <input type="hidden" value="Admin" name="g">
+    <input type="hidden" value="Count" name="m">
+    <input type="hidden" value="index" name="a">
+      <div class="search_type cc mb10">
+      <div class="mb10"> 
+        订单号:
+        <input type="text" value="{$Think.get.o_order_num}" class="input-text" style="width:200px;" name="o_order_num">
+        下单时间：
+        <input type="text" name="start_time" id="start_time" value="{$Think.get.start_time}" size="10" class="date" style="width:100px;" >&nbsp;
+<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: true,
+		    inputField : "start_time",
+		    trigger    : "start_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>-
+<input type="text" name="end_time" id="end_time" value="{$Think.get.end_time}" size="10" class="date" style="width:100px;" >&nbsp;
+<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: true,
+		    inputField : "end_time",
+		    trigger    : "end_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>	
+      <input type="submit" value="确定搜索" class="btn btn-primary btn_submit J_ajax_submit_btn" name="dosubmit">
+      </div></div>
+  </form>
+
+<div class="table_list">
+      <table width="100%" class="table table-hover">
+       <thead>
+        <tr>
+            <th width="50">序号</th>
+            <th align="center" width='125'>订单号</th>
+            <th width='60' align="center">人数</th>
+            <th align="center" width='80'>成人天涯价</th>
+            <th align="center" width='80'>成人成本价</th>
+            <th align="center" width='80'>老人天涯价</th>
+            <th align="center" width='80'>老人成本价</th>
+            <th align="center" width='80'>儿童天涯价</th>
+            <th align="center" width='80'>儿童成本价</th>
+            <th align="center" width='120'>下单时间</th>
+          </tr>
+        </thead>
+        
+        <foreach name="orders" item="vo">
+          <tr>
+            <td width="40" align="center">{$vo.o_id}</td>
+            <td>{$vo.o_oder_num}</td>
+             <td align="center">{$vo.o_adult_num}大{$vo.o_child_num}小{$vo.o_old_num}老</td>
+            <td align="center">{$vo.o_adult_cb_price}</td>
+            <td align="center">{$vo.o_adult_price}</td>
+            <td align="center">{$vo.o_old_cb_price}</td>
+            <td align="center">{$vo.o_old_price}</td>
+            <td align="center">{$vo.o_child_cb_price}</td>
+            <td align="center">{$vo.o_old_price}</td>
+            <td align="center">{$vo.o_addtime|date="Y-m-d H:i:s",###}</td>
+          </tr>
+         </foreach>
+          </table>
+          <div class="pagination">{$Page}</div>
+     
+    </div>
+</div>
+</body>
+</html>

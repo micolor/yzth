@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<include file="Common:cssjs" />
+<link rel="stylesheet" type="text/css" href="{$Config.siteurl}statics/js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="{$Config.siteurl}statics/js/calendar/border-radius.css"/>
+<link rel="stylesheet" type="text/css" href="{$Config.siteurl}statics/js/calendar/win2k.css"/>
+<script type="text/javascript" src="{$Config.siteurl}statics/js/calendar/calendar.js"></script> 
+<script type="text/javascript" src="{$Config.siteurl}statics/js/calendar/lang/en.js"></script>
+</head>
+<body>
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"> </div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="pad-lr-10">
+  <form name="searchform" action="{$Config.siteurl}index.php" method="get" >
+    <input type="hidden" value="Admin" name="g">
+    <input type="hidden" value="Logs" name="m">
+    <input type="hidden" value="index" name="a">
+    <table width="100%" cellspacing="0" class="search-form">
+      <tbody>
+        <tr>
+          <td><div class="explain-col">
+              用户名:
+              <input type="text" value="{$Think.get.username}" class="input-text" name="username">
+              IP:
+              <input type="text" value="{$Think.get.ip}" class="input-text" name="ip" size='20'>
+              时 间:
+              <input type="text" name="start_time" id="start_time" value="{$Think.get.start_time}" size="21" class="date" readonly>
+              &nbsp;<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: true,
+		    inputField : "start_time",
+		    trigger    : "start_time",
+		    dateFormat: "%Y-%m-%d %H:%M:%S",
+		    showTime: 12,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script> 至
+              <input type="text" name="end_time" id="end_time" value="{$Think.get.end_time}" size="21" class="date" readonly>
+              &nbsp;<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: true,
+		    inputField : "end_time",
+		    trigger    : "end_time",
+		    dateFormat: "%Y-%m-%d %H:%M:%S",
+		    showTime: 12,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>
+              <input type="submit" value="确定搜索" class="button" name="dosubmit">
+              &nbsp;&nbsp;
+              <input type="button" class="button" name="del_log_4" value="删除一月前数据" onclick="location='{:U("Logs/deletelog")}'"  />
+            </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="20">ID</th>
+            <th width="150">用户名</th>
+            <th align="left">说明</th>
+            <th>时间</th>
+            <th>IP</th>
+          </tr>
+        </thead>
+        <tbody>
+        <volist name="logs" id="vo">
+          <tr>
+            <td align="center">{$vo.id}</td>
+            <td align="center">{$vo.username}</td>
+            <td align="left">{$vo.info}</td>
+            <td align="center">{$vo.time}</td>
+            <td align="center">{$vo.ip}</td>
+          </tr>
+         </volist>
+        </tbody>
+      </table>
+      <div class="btn"> </div>
+        <div class="page" style="text-align: center;">
+            {$page}
+        </div>
+    </div>
+</div>
+</body>
+</html>

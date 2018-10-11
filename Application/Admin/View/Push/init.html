@@ -1,0 +1,49 @@
+<!DOCTYPE html><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<include file="Common:cssjs2" />
+</head>
+<body>
+<div class="subnav">
+<div class="content-menu ib-a blue line-x">
+<a href='javascript:;' class="on"><em>推荐位：{$info.push_name}文章列表</em></a>
+
+</div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="table-list pad-lr-10">
+  <form name="myform" action="" method="post">
+    <table width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th width="10%">排序</th>
+          <th width="15%">ID</th>
+          <th width="15%">新闻ID</th>
+          <th width="35%"  align="left" >新闻名称</th>
+          <th class="text-c"  width="15%">管理操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <foreach name="list" item="vo">
+        <tr>
+          <td width="10%" align="center"><input name='listorders[{$vo.p_id}]' type='text' size='3' value='{$vo.p_listorder}' class="input-text-c"></td>
+          <td width="10%" align="center">{$vo.p_id}</td>
+            <td width="10%" align="center">{$vo.new_id}</td>
+          <td width="15%"  >{$vo.p_title}</td>
+          
+          <td align='center'>
+            <a href="javascript:confirmurl('{:U('Push/delete',array('id'=>$vo['p_id']))}', '是否确定删除？')">删除</a>
+			</td>
+        </tr>
+        </foreach>
+      </tbody>
+    </table>
+    <div class="btn">
+      <input type="submit" class="button" name="dosubmit" value="排序" onClick="document.myform.action='{:U("Push/listorders")}';return confirm('确认重新排序？')"/> 
+    </div>
+  </form>
+</div>
+</body>
+</html>

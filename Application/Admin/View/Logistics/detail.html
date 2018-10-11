@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<include file="Common:cssjs" />
+</head>
+<body>
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"> <a href='{:U("Logistics/index")}' ><em>物流公司管理</em></a><span>|</span><a href='javascript:;' class="on"><em>物流公司详情</em></a> </div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="common-form">
+    <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
+      <tbody>
+        <tr>
+          <th width="80">物流公司名称:</th>
+          <td>{$detail.lcompany}</td>
+        </tr>
+        <tr>
+          <th width="80">物流公司地址:</th>
+          <td>{$detail.laddress}</td>
+        </tr>
+        <tr>
+          <th width="80">公司联系人:</th>
+          <td>{$detail.llinkman}</td>
+        </tr>
+        <tr>
+          <th width="80">联系人电话:</th>
+          <td>{$detail.llinktel}</td>
+        </tr>    
+        <tr>
+          <th width="80">LOGO:</th>
+          <td>{$detail.html_llogo}</td>
+        </tr>        
+        <tr>
+        	<th width="80">配送区域描述:</th>
+        	<td><div style="width:90%;">{$detail.ldispense_area}</div></td>
+        </tr>          
+        <tr>
+            <th width="80">内容:</th>
+            <td><div style="width:90%;">{$detail.ldesc}</div></td>
+        </tr>
+    <tr>
+		<th>状态:</th>
+		<td>{$detail.html_lstatus}</td>
+	</tr>
+      </tbody>
+    </table>
+    <div class="btn">
+    </div>
+</div>
+</body>
+</html>

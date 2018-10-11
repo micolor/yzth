@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<include file="Common:cssjs" />
+</head>
+<body>
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"> <a href='{:U("Logistics/index")}' ><em>物流公司管理</em></a><span>|</span><a href='javascript:;' class="on"><em>添加物流公司</em></a> </div>
+</div>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="common-form">
+  <form method="post" id="myform" action="" enctype="multipart/form-data" onsubmit="return check_form();">
+    <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
+      <tbody>
+        <tr>
+          <th width="80">物流公司名称:</th>
+          <td><input type="text" class="input-text" style="width:300px;" name="info[lcompany]" id="lcompany" value="{$detail.lcompany}"></td>
+        </tr>
+        <tr>
+          <th width="80">物流公司地址:</th>
+          <td><input type="text" class="input-text" style="width:300px;" name="info[laddress]" value="{$detail.laddress}"></td>
+        </tr>
+        <tr>
+          <th width="80">公司联系人:</th>
+          <td><input type="text" class="input-text" style="width:300px;" name="info[llinkman]" value="{$detail.llinkman}"></td>
+        </tr>
+        <tr>
+          <th width="80">联系人电话:</th>
+          <td><input type="text" class="input-text" style="width:300px;" name="info[llinktel]" value="{$detail.llinktel}"></td>
+        </tr>    
+        <tr>
+          <th width="80">LOGO:</th>
+          <td style="position:relative;"><input type="file" class="input-text" style="width:307px;" name="logo" >
+          <if condition="$detail.llogo">
+	      <a href="javascript:;"  onmousemove="$('#showimg').show();" onmouseout="$('#showimg').hide();">{$detail.llogo}</a>  <span id="showimg" style="position:absolute; display:none;"><img src="{$detail.llogo}" width="150" /></span>
+	      </if>
+          </td>
+        </tr>        
+        <tr>
+        	<th width="80">配送区域描述:</th>
+        	<td><textarea name="info[ldispense_area]" style="width:600px;height:150px;">{$detail.ldispense_area}</textarea></td>
+        </tr>          
+        <tr>
+            <th width="80">内容:</th>
+            <td><textarea name='content' id='content' style='width:90%;height:400px;'>{$detail.ldesc}</textarea>{$keshow}</td>
+        </tr>
+    <tr>
+		<th>状态:</th>
+		<td><label class="inputs"><input type="radio" name="info[lstatus]" value="1" checked="checked" /> 开启 </label>
+            <label class="inputs"><input type="radio" name="info[lstatus]" value="2" <eq name="detail['lstatus']" value="2">checked</eq> /> 关闭</label></td>
+	</tr>
+      </tbody>
+    </table>
+    <div class="btn">
+      <input type="hidden" name="lid" value="{$detail.lid}" />
+      <input type="submit" value="提交" class="button" name="dosubmit">
+      <input type="reset" value="重置" class="button">
+    </div>
+  </form>
+<script type="text/javascript">
+function check_form(){
+    if(!$('#lcompany').val()){
+	       alert('对不起，公司名称不能为空！');	
+		   return false;
+	}
+}
+</script>
+</div>
+</body>
+</html>

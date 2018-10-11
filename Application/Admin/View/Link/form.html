@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+<head>
+  <include file="Common:Formcss" />
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5><if condition="$detail['id'] neq null">修改<else/>添加</if>友情链接</h5>
+          <div class="ibox-tools">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="{:U('Link/index')}">返回友情链接</a>
+              </li>
+              </li>
+            </ul>
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div style="display: block;" class="ibox-content">
+          <form novalidate="novalidate" class="form-horizontal m-t" id="myform" action="" method="post">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">链接标题</label>
+              <div class="col-sm-10  control">
+                <input type="text" name="link_name" class="form-control" id="link_name" value="{$detail.link_name}">
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">链接地址</label>
+              <div class="col-sm-10  control">
+                <input type="url" name="link_url" value="{$detail.link_url}" id="link_url" class="form-control" placeholder="以http://开头">
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">链接类型</label>
+              <div class="col-sm-10  control">
+
+                <div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="urltype_wz">
+                  <input type="radio" style="position: absolute; opacity: 0;" value="1">
+                  <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                </div><i></i>文字类型
+
+                <div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="urltype_tp">
+                  <input type="radio" style="position: absolute; opacity: 0;" value="2">
+                  <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                </div><i></i>图片类型
+
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+
+            <div style="display: none" id="parterlogo">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">网站logo</label>
+                <div class="col-sm-8">
+                  <if condition="$detail.link_img">
+                    <div class="uploadesm" id="thumbimg"> <img  src='{$detail.link_img}'   ></div>
+                    <else />
+                    <div class="uploadesm" id="thumbimg">图片大小不得超过3M</div>
+                  </if>
+                  <span style="display: block;margin-top: 5px;margin-bottom: -20px;"> <input data-no-uniform="true" type="file" name="newsimg" id="newsimg" /> </span>
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">状态</label>
+              <div class="col-sm-10  control">
+                <div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="static_yes">
+                  <input type="radio" style="position: absolute; opacity: 0;" value="1" >
+                  <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                </div><i></i>开启
+                <div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="static_no">
+                  <input type="radio" style="position: absolute; opacity: 0;" value="2" >
+                  <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                </div><i></i>关闭
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">排序</label>
+              <div class="col-sm-10  control">
+                <input type="text" name="link_order" value="{$detail.link_order}" class="form-control">
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                <input type="hidden" name="link_id" value="{$detail.link_id}" />
+                <input  type="hidden" name="link_img" id="thumb" value="{$detail.link_img}">
+                <input type="hidden" id="link_static" name="link_static" value="{$detail.link_static}"/>
+                <input type="hidden" id="link_type" name="link_type" value="{$detail.link_type}"/>
+                <input name="dosubmit" type="submit" value="提交"  class="btn btn-primary" id="dosubmit">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<include file="Common:Formjs" />
+<link href='/Public/js_uploadify/uploadify.css' rel='stylesheet'>
+<script src="/Public/js_uploadify/jquery.uploadify.min.js"></script>
+<style>
+  .uploadesm{ width:320px; height:240px; background:#F8F8F8; border:1px solid #C1C1C1; line-height:250px; text-align:center}
+  .uploadesm img { width:310px; height:230px;margin-top: -15px;}
+</style>
+</body>
+</html>
+<script>
+  $.validator.setDefaults({
+    highlight: function (element) {
+      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function (element) {
+      element.closest('.form-group').removeClass('has-error').addClass('has-success');
+    },
+    errorElement: "span",
+    errorPlacement: function (error, element) {
+      if (element.is(":radio") || element.is(":checkbox")) {
+        error.appendTo(element.parent().parent().parent());
+      } else {
+        error.appendTo(element.parent());
+      }
+    },
+    errorClass: "help-block m-b-none",
+    validClass: "help-block m-b-none"
+  });
+
+  $(function () {
+// validate signup form on keyup and submit
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#myform").validate({
+      rules: {
+        link_name:{
+          required: true,
+          minlength: 1
+        },
+        link_url:{
+          required: true,
+          minlength: 1
+        }
+      },
+      messages: {
+        link_name:{
+          required: icon + "请输入合作伙伴名称",
+          minlength: icon + "合作伙伴不能为空"
+        },
+        link_url: {
+          required: icon + "请输入链接地址",
+          minlength: icon + "链接地址不能为空"
+        }
+      }
+    });
+
+  });
+
+  $(function(){
+
+    var link_type = $("#link_type").val();
+    if(link_type == 1){
+      $("#urltype_wz").addClass("checked");
+      $("#urltype_wz").find("input[type=radio]").attr("checked","");
+    }else{
+      $("#urltype_tp").addClass("checked");
+      $("#urltype_tp").find("input[type=radio]").attr("checked","");
+      $("#parterlogo").show();
+    }
+
+    var link_static = $("#link_static").val();
+    if(link_static == 1){
+      $("#static_yes").addClass("checked");
+      $("#static_yes").find("input[type=radio]").attr("checked","");
+    }else{
+      $("#static_no").addClass("checked");
+      $("#static_no").find("input[type=radio]").attr("checked","");
+    }
+
+    $("#urltype_wz").click(function(){
+      $(this).addClass("checked");
+      $(this).find("input[type=radio]").attr("checked","checked");
+
+      $("#urltype_tp").removeClass("checked");
+      $("#urltype_tp").find("input[type=radio]").removeAttr("checked");
+      $("#parterlogo").hide();
+      $("#link_type").val(1);
+
+    });
+
+    $("#urltype_tp").click(function(){
+      $(this).addClass("checked");
+      $(this).find("input[type=radio]").attr("checked","checked");
+
+      $("#urltype_wz").removeClass("checked");
+      $("#urltype_wz").find("input[type=radio]").removeAttr("checked");
+      $("#parterlogo").show();
+      $("#link_type").val(2);
+    });
+
+    $("#static_yes").click(function(){
+      $(this).addClass("checked");
+      $(this).find("input[type=radio]").attr("checked","checked");
+
+      $("#static_no").removeClass("checked");
+      $("#static_no").find("input[type=radio]").removeAttr("checked");
+      $("#link_static").val(1);
+    });
+
+    $("#static_no").click(function(){
+      $(this).addClass("checked");
+      $(this).find("input[type=radio]").attr("checked","checked");
+
+      $("#static_yes").removeClass("checked");
+      $("#static_yes").find("input[type=radio]").removeAttr("checked");
+      $("#link_static").val(2);
+    });
+
+
+    /*var linkstaic =  $("#linkstatic").val();
+     if(linkstaic == 1){
+     $("#static_yes").click();
+     }else{
+     $("#static_no").click();
+     }
+
+     var linkurltype =  $("#linkurltype").val();
+     if(linkurltype == 1){
+     $("#urltype_wz").click();
+     }else{
+     $("#urltype_tp").click();
+     }*/
+  });
+
+  $('#newsimg').uploadify({
+    'auto'     : true,//关闭自动上传
+    'removeTimeout' : 1,//文件队列上传完成1秒后删除
+    'swf'      : '/Public/js_uploadify/uploadify.swf',
+    'uploader' : "/Home/Fileuploade/ajaxupload.html",
+    'method'   : 'post',//方法，服务端可以用$_POST数组获取数据
+    'buttonText' : '选择图片',//设置按钮文本
+    "height"          : 40,
+    "width"           : 120,
+    'multi'    : false,//允许同时上传多张图片
+    'uploadLimit' : 20,//一次最多只允许上传1张图片
+    'fileTypeDesc' : 'Image Files',//只允许上传图像
+    'fileTypeExts' : '*.gif; *.jpg;*.png;',//限制允许上传的图片后缀
+    'fileSizeLimit' : 3*1024,//限制上传的图片不得超过3000K
+    'onUploadSuccess':function(file,data,response){
+      if(data=='-1'){
+        var txt=  "图片上传失败！";
+        alert(txt);
+      }else{
+        $("#thumb").val(data);
+        $('#thumbimg').html('');
+        var  htmlimg="<img  src='"+data+"'   >";
+        $('#thumbimg').html(htmlimg);
+      }
+
+    }
+  });
+
+</script>

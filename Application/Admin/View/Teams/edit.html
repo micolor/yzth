@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+    <include file="Common:Formcss"/>
+    <link rel="stylesheet" href="/Public/kindeditor/themes/default/default.css"/>
+    <link rel="stylesheet" href="/Public/kindeditor/plugins/code/prettify.css"/>
+    <script charset="utf-8" src="/Public/kindeditor/kindeditor-min.js"></script>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改团队</h5>
+                    <div class="ibox-tools">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="{:U('Teams/index')}">返回团队管理</a>
+                            </li>
+                            </li>
+                        </ul>
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div style="display: block;" class="ibox-content">
+                    <form novalidate="novalidate" class="form-horizontal m-t" id="myform" action="" method="post">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">团队名称</label>
+                            <div class="col-sm-10  control">
+                                <input type="text" name="team_name" class="form-control" id="team_name"
+                                       value="{$detail.team_name}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">负责人</label>
+                            <div class="col-sm-10 ">
+                                <select class="form-control m-b" name="leader_id">
+                                    <foreach name="members" item="vo">
+                                        <option value="{$vo.id}"
+                                        <if condition="$detail.leader_id eq $vo['id']">selected</if>
+                                        >{$vo.member_name}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div id="parterlogo">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">团队缩略图</label>
+                                <div class="col-sm-8">
+                                    <!--用来存放item-->
+                                    <div id="fileList" class="uploader-list">
+                                        <div class="file-item thumbnail">
+                                            <if condition="$detail[thumb]">
+                                                <img src="{$detail.thumb}">
+                                            </if>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="thumb" id="filepath" value="{$detail.thumb}">
+                                    <div id="filePicker">选择图片</div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">团队简介</label>
+                            <div class="col-sm-10 ">
+                                <input type="text" name="team_desc" class="form-control" id="team_desc"
+                                       value="{$detail.team_desc}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">团队介绍</label>
+                            <div class="col-sm-10 ">
+                                <textarea name='team_content' id="team_content"
+                                          style="width:90%; height:400px; max-width:637px;resize:none;">{$detail.team_content}</textarea>
+                                <script>
+                                  KindEditor.ready(function (K) {
+                                    K.create('textarea[name="team_content"]', {
+                                      autoHeightMode: true,
+                                      resizeType: 1,
+                                      afterCreate: function () {
+                                        this.loadPlugin('autoheight');
+                                      },
+                                      items: ['source', '|', 'fullscreen', 'undo', 'redo', 'print', 'cut', 'copy', 'paste',
+                                        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                                        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|', 'selectall',
+                                        'title', 'fontname', 'fontsize', 'textcolor', 'bgcolor', 'bold', '-',
+                                        'italic', 'underline', 'strikethrough', 'removeformat', '|', 'image', 'multiimage',
+                                        'advtable', 'table', 'pagebreak', 'clearhtml', 'template', 'quickformat', 'link', 'unlink', 'media', 'flash']
+                                    });
+                                  });
+                                </script>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <input type="hidden" name="id" value="{$detail.id}"/>
+                                <input name="dosubmit" type="submit" value="提交" class="btn btn-primary" id="dosubmit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Common:Formjs"/>
+<link href='/Public/uploader/webuploader.css' rel='stylesheet'>
+<script src="/Public/uploader/webuploader.js"></script>
+<style>
+    .thumbnail {
+        width: 320px;
+        height: 240px;
+        background: #F8F8F8;
+        border: 1px solid #C1C1C1;
+        line-height: 250px;
+        text-align: center
+    }
+    .thumbnail img {
+        width: 320px;
+        height: 230px;
+    }
+</style>
+</body>
+</html>
+<script>
+  $.validator.setDefaults({
+    highlight: function (element) {
+      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function (element) {
+      element.closest('.form-group').removeClass('has-error').addClass('has-success');
+    },
+    errorElement: "span",
+    errorPlacement: function (error, element) {
+      if (element.is(":radio") || element.is(":checkbox")) {
+        error.appendTo(element.parent().parent().parent());
+      } else {
+        error.appendTo(element.parent());
+      }
+    },
+    errorClass: "help-block m-b-none",
+    validClass: "help-block m-b-none"
+  });
+
+  $(function () {
+// validate signup form on keyup and submit
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#myform").validate({
+      rules: {
+        team_name: {
+          required: true,
+          minlength: 1
+        },
+        team_desc: {
+          required: true,
+          minlength: 1
+        }
+      },
+      messages: {
+        team_name: {
+          required: icon + "请输入团队名称",
+          minlength: icon + "团队名称不能为空"
+        },
+        team_desc: {
+          required: icon + "请输入团队简介",
+          minlength: icon + "团队简介不能为空"
+        }
+      }
+    });
+    var uploader = WebUploader.create({
+      auto: true,
+      // swf文件路径
+      swf: '/Public/uploader/Uploader.swf',
+      // 文件接收服务端。
+      server: '/Admin/Fileuploade/ajax_upload.html',
+      // 选择文件的按钮。可选。
+      // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+      pick: '#filePicker',
+      // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+      resize: false,
+      multiple: false,
+      duplicate: true,
+      // 只允许选择图片文件。
+      accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/*'
+      }
+    });
+    uploader.on('uploadSuccess', function (file, data) {
+      var $li = $(
+          '<div class="file-item thumbnail">' +
+          '<img src="' + data.src + '">' +
+          '</div>'
+      )
+      $("#fileList").html($li);
+      $("#filepath").val(data.src);
+    });
+    uploader.on('uploadError', function (file) {
+      alert('上传出错');
+    });
+  });
+</script>

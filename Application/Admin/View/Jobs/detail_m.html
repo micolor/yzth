@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+  <include file="Common:Formcss" />
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>查看职位申请</h5>
+          <div class="ibox-tools">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="{:U('Jobs/index')}">返回职位申请</a>
+              </li>
+              </li>
+            </ul>
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div style="display: block;" class="ibox-content">
+          <form novalidate="novalidate" class="form-horizontal m-t" id="myform" action="" method="post">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">真实姓名</label>
+              <div class="col-sm-10  control">
+                <input type="text" class="form-control" value="{$list.realname}" disabled>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">联系电话</label>
+              <div class="col-sm-10  control">
+                <input type="text" class="form-control" value="{$list.linkphone}" disabled>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">联系邮箱</label>
+              <div class="col-sm-10  control">
+                <input type="text" class="form-control" value="{$list.email}" disabled>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">学历</label>
+              <div class="col-sm-10  control">
+                <select class="form-control m-b" disabled>
+                  <option <if condition="$list.education eq 1">selected</if>>专科</option>
+                  <option <if condition="$list.education eq 2">selected</if>>本科</option>
+                  <option <if condition="$list.education eq 3">selected</if>>硕士</option>
+                  <option <if condition="$list.education eq 4">selected</if>>博士</option>
+                  <option <if condition="$list.education eq 5">selected</if>>博士以上</option>
+                </select>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">性别</label>
+              <div class="col-sm-10  control">
+                <select class="form-control m-b" disabled>
+                  <option <if condition="$list.sex eq 1">selected</if>>男</option>
+                  <option <if condition="$list.sex eq 2">selected</if>>女</option>
+                </select>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">审核状态</label>
+              <div class="col-sm-10 ">
+                <select class="form-control m-b" name="status" id="status">
+                    <option value='1' <if condition="$list.status eq 1">selected</if>>面试中</option>
+                    <option value='2' <if condition="$list.status eq 2">selected</if>>录用</option>
+                    <option value='3' <if condition="$list.status eq 3">selected</if>>未录用</option>
+                </select>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                <input type="hidden" value="{$list.jid}" name="jid">
+                <input type="hidden" value="{$list.id}" name="jobjoinid">
+                <input name="dosubmit" type="submit" value="提交"  class="btn btn-primary" id="dosubmit">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<include file="Common:Formjs" />
+</body>
+</html>

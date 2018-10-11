@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+  <include file="Common:Formcss" />
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>修改管理员</h5>
+          <div class="ibox-tools">
+            <a href="javascript:history.back();">
+              <i class="glyphicon glyphicon-arrow-left"></i>
+            </a>
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+          <div style="display: block;" class="ibox-content">
+            <form novalidate="novalidate" class="form-horizontal m-t" id="myform" action="" method="post">
+              <input type="hidden" name="id" value="{$data.id}">
+              </input>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">真实姓名</label>
+                <div class="col-sm-10  control">
+                  <input type="text" name="nickname" class="form-control" id="nickname" value="{$data.nickname}">
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">登录名</label>
+                <div class="col-sm-10  control">
+                  <input type="text" name="username" id="username" class="form-control" value="{$data.username}" disabled>
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10  control">
+                  <input type="password" name="password" id="password" class="form-control">
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">确认密码</label>
+                <div class="col-sm-10  control">
+                  <input type="password" name="pwdconfirm" class="form-control" id="pwdconfirm">
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10  control">
+                  <textarea id="remark" name="remark" class="form-control" rows="2" cols="20">{$data.remark}</textarea>
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">所属角色</label>
+                <div class="col-sm-10 ">
+                  <select class="form-control m-b" name="role_id">
+                    <foreach name="role" item="vo">
+                      <option value="{$vo.id}" <if condition="$data['role_id'] eq $vo['id'] ">selected</if>>{$vo.name}</option>
+                    </foreach>
+                  </select>
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">是否启用</label>
+                <div class="col-sm-10 ">
+                  <select class="form-control m-b" name="status">
+                    <option value="1" <if condition="$data['status'] eq 1 ">selected</if>>开启</option>
+                    <option value="0" <if condition="$data['status'] eq 0 ">selected</if>>禁止</option>
+                  </select>
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+              <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                  <input name="dosubmit" type="submit" value="提交"  class="btn btn-primary" id="dosubmit">
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<include file="Common:Formjs" />
+</body>
+</html>
+<script>
+
+  $.validator.setDefaults({
+    highlight: function (element) {
+      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function (element) {
+      element.closest('.form-group').removeClass('has-error').addClass('has-success');
+    },
+    errorElement: "span",
+    errorPlacement: function (error, element) {
+      if (element.is(":radio") || element.is(":checkbox")) {
+        error.appendTo(element.parent().parent().parent());
+      } else {
+        error.appendTo(element.parent());
+      }
+    },
+    errorClass: "help-block m-b-none",
+    validClass: "help-block m-b-none"
+  });
+
+  $(function () {
+// validate signup form on keyup and submit
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#myform").validate({
+      rules: {
+        username:{
+          required: true,
+          minlength: 1,
+          remote: {
+            url: "{:U('Admin/Management/public_verifyusername')}",     //后台处理程序
+            type: "get",               //数据发送方式
+            dataType: "json",           //接受数据格式
+            data: {                     //要传递的数据
+              username: function() {
+                return $("#username").val();
+              }
+            }
+          }
+        },
+        pwdconfirm: {
+          equalTo: "#password"
+        }
+      },
+      messages: {
+        username:{
+          required: icon + "请输入登录名",
+          remote: icon + "此用户名已存在",
+          minlength: icon + "登录名不能为空"
+        },
+        pwdconfirm: {
+          equalTo: icon + "两次输入的密码不一致"
+        }
+      }
+    });
+
+  });
+</script>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <include file="Common:Formcss" />
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>修改菜单</h5>
+          <div class="ibox-tools">
+            <a aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="/Admin/Menu/index.html">返回菜单管理</a>
+              </li>
+            </ul>
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div style="display: block;" class="ibox-content">
+          <form novalidate="novalidate" class="form-horizontal m-t" id="myform" action="{:U('Menu/edit')}" method="post">
+            <input type="hidden" name="id" value="{$Menudata['id']}" />
+            <div class="form-group">
+              <label class="col-sm-2 control-label">上级</label>
+              <div class="col-sm-10  control">
+                <select name="parentid" class="form-control" >
+                  <option value="0">作为一级菜单</option>
+                  <volist name="Menucache" id="vo"> <option value='{$vo['id']}' <eq name="Menudata['parentid']" value="$vo['id']">selected</eq>> {$vo['name']}
+                    </option>
+                    <volist name="vo['lower']" id="lo"> <option value='{$lo['id']}' <eq name="Menudata['parentid']" value="$lo['id']">selected</eq>>&nbsp;├ {$lo['name']}
+                      </option>
+                      <volist name="lo['lower']" id="loo"> <option value='{$loo['id']}'  <eq name="Menudata['parentid']" value="$loo['id']">selected</eq>>&nbsp;│&nbsp;├ {$loo['name']}
+                        </option>
+                      </volist>
+                    </volist>
+                  </volist>
+                </select>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">名称</label>
+              <div class="col-sm-10  control">
+                <input type="text" class="form-control" name="name" value="{$Menudata['name']}">
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">项目</label>
+              <div class="col-sm-10  control">
+                <input type="text" class="form-control" name="app" value="{$Menudata['app']}">
+                <span class="help-block m-b-none">第一个字母必须大写例如 Admin</span>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">模块</label>
+              <div class="col-sm-10  control">
+                <input type="text" class="form-control" name="model" value="{$Menudata['model']}">
+                <span class="help-block m-b-none"> 第一个字母必须大写例如 Index</span>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">方法</label>
+              <div class="col-sm-10  control">
+                <input type="text" class="form-control" name="action" value="{$Menudata['action']}">
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">参数</label>
+              <div class="col-sm-10  control">
+                <input type="text" class="form-control" name="data" value="{$Menudata['data']}">
+                <span class="help-block m-b-none"> 例:groupid=1&amp;type=2</span>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">是否显示</label>
+              <div class="col-sm-10  control">
+                <input type="radio" name="status" value="1"  <eq name="Menudata['status']" value="1">checked</eq> > 是 <input type="radio" name="status" value="0" <eq name="Menudata['status']" value="0">checked</eq>> 否
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+
+            <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                <input type="hidden" name="type" value="1" />
+                <input name="dosubmit" type="submit" value="提交"  class="btn btn-primary" id="dosubmit">
+                <button class="btn btn-white" href="__URL__" type="reset">重置</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<include file="Common:Formjs" />
+</body>
+</html>
