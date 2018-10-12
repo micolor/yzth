@@ -54,7 +54,7 @@ class ProductsController extends AdminbaseController
             $where .= " and status = '$status'";
         }
         $Menucache = $this->Menulistarray();
-        $count = M("products_cat")->where($where)->count();
+        $count = M("products")->where($where)->count();
         $page = $this->page($count, 15);
         $list = M("products")->where($where)->order(array("listorder" => "asc", "addtime" => "desc"))->limit($page->firstRow . ',' . $page->listRows)->select();
         foreach ($list as $k => $v) {
@@ -207,7 +207,7 @@ class ProductsController extends AdminbaseController
         $info['maxcharperpage'] = '1000';
         $this->assign('info', $info);
         $this->assign('Menucache', $Menucache);
-        $this->assign('act', U('New/add'));
+        $this->assign('act', U('Products/add'));
         $this->display('info');
     }
 
@@ -297,7 +297,7 @@ class ProductsController extends AdminbaseController
         if (!$info['thumb']) $info['tempthumb'] = '/statics/img/admin_img/upload-pic.png';
         $this->assign('Menucache', $Menucache);
         $this->assign('info', $info);
-        $this->assign('act', U('New/edit'));
+        $this->assign('act', U('Products/edit'));
         $this->display('info');
     }
 
@@ -330,7 +330,7 @@ class ProductsController extends AdminbaseController
     {
         if (isset($_GET['dosubmit'])) {
             foreach ($_POST['listorders'] as $id => $listorder) {
-                M('news')->where("nid=$id")->save(array('listorder' => $listorder));
+                M('products')->where("nid=$id")->save(array('listorder' => $listorder));
             }
             $this->success("排序成功！");
         } else {

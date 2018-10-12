@@ -50,7 +50,7 @@
                             var uploadbutton = K.uploadbutton({
                                 button: K('#uploadButton')[0],
                                 fieldName: 'imgFile',
-                                url: "{:U('Admin/New/ajaximg')}",
+                                url: "{:U('Admin/Products/ajaximg')}",
                                 afterUpload: function (data) {
 
                                     if (data.error === 0) {
@@ -99,7 +99,7 @@
                     <table width="100%" cellspacing="0" class="table_form">
                         <tbody>
                         <tr>
-                            <th width="80"><font color="red">*</font> 栏目</th>
+                            <th width="80"><font color="red">*</font> 分类</th>
                             <td>
                                 <select name="catid">
                                     <volist name="Menucache" id="vo">
@@ -114,7 +114,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th width="80"><font color="red">*</font> 标题</th>
+                            <th width="80"><font color="red">*</font> 产品</th>
                             <td>
                                 <input type="text" style="width:400px;" name="title" id="title" value="{$info.title}"
                                        class="measure-input " onBlur=""
@@ -129,37 +129,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <th width="80"> 来源</th>
-                            <td><input type='text' name='source' id="source" value="{$info.source}"
-                                       style='width: 400px;' class='input-text'>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th width="80"> 浏览量</th>
-                            <td><input type='text' name='hits' id="hits" value="{$info.hits}" style='width: 400px;'
-                                       class='input-text'>&nbsp;&nbsp;填写数字
-
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <th width="80"> 摘要</th>
+                            <th width="80"> 简介</th>
                             <td>
                                 <textarea name='ndesc' id='desc' style='width:98%;height:50px;'
                                           onkeyup="strlen_verify(this, 'description_len', 255)">{$info.ndesc}</textarea>还可输入<B><span
                                     id="description_len">255</span></B> 个字符
                             </td>
-                        </tr>
-                        <tr>
-                            <th width="80">作者</th>
-                            <td><input type='text' name='author' id="author" value="{$info.author}"
-                                       style='width: 400px;' class='input-text'></td>
-                        </tr>
-                        <tr>
-                            <th width="80">地点</th>
-                            <td><input type='text' name='address' id="address" value="{$info.address}"
-                                       style='width: 400px;' class='input-text'></td>
                         </tr>
                         <tr>
                             <th width="80" style="color:#F00">是否发布</th>
@@ -172,18 +147,9 @@
                                 /> 未发布
                             </td>
                         </tr>
-
-                        <tr>
-                            <th width="80">视频时长</th>
-                            <td><input type='text' name='vtime' id="vtime" value="{$info.vtime}" style='width: 400px;'
-                                       class='input-text'>一小时三十分三十秒格式如 01:30:30
-                            </td>
-                        </tr>
-
-
                         <tr>
                             <th>产品内容</th>
-                            <td><textarea name='content' id="content" style="width:637px; height:400px; max-width:637px;resize:none;">{$info.content}</textarea>
+                            <td><textarea name='content' id="content" style="width:637px; height:500px; max-width:637px;resize:none;">{$info.content}</textarea>
                             </td>
                         </tr>
                         <tr>

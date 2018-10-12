@@ -44,7 +44,7 @@ class ProductscatController extends AdminbaseController {
 			}
     		$rel=M('products_cat')->add($data);
     		if($rel){
-    			$this->success("添加成功！","/Admin/ProductsCat/index");
+    			$this->success("添加成功！","/Admin/Productscat/index");
     		}else{
     			$this->error("添加失败！");
     		}
@@ -86,7 +86,7 @@ class ProductscatController extends AdminbaseController {
             $data["is_show"] = I("post.is_show");
 			$rel=M('products_cat')->where("cate_id=$id")->save($data);
     		if($rel){
-    			$this->success("修改成功！",'/Admin/ProductsCat/index');
+    			$this->success("修改成功！",'/Admin/Productscat/index');
     		}else{
     			$this->error("修改失败！");
     		}
@@ -144,14 +144,12 @@ class ProductscatController extends AdminbaseController {
 
     //排序
     function listorders(){
-    $listorders  = $_POST['listorders'];
-    
+        $listorders  = $_POST['listorders'];
 		foreach($listorders as $id=>$listorder){
 			 $da_order['sort_order'] = $listorder;
 			 M('products_cat')->where(" cate_id = '$id' ")->save($da_order);
 		}	
         $this->success("排序更新成功！");
-        
     }
 
 }
