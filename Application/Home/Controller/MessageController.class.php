@@ -1,6 +1,6 @@
 <?php
 /**
- * 客户见证
+ * 客户留言
  * Created by PhpStorm.
  * User: Ann
  * Date: 2018/7/17
@@ -13,81 +13,38 @@ use Appframe\BaseController;
 
 class MessageController extends BaseController
 {
-    protected $catdb, $ncontent, $news;
+    protected $db;
 
     function _initialize()
     {
         parent::_initialize();
-        $this->catdb = D('newcat');
-        $this->ncontent = D('ncontent');
-        $this->news = M('news');
-        //左侧导航-客户见证
-        $aside = $this->catdb->where("(cate_id = '1' or parent_id = '1') and is_show='1'")->order(array("parent_id" => "asc", "sort_order" => "asc"))->select();
-        $aside['0']['url'] = '';
-        $aside['1']['url'] = '/client/cases.html';
-        $aside['2']['url'] = '/client/vist.html';
-        $active = $_SERVER['REQUEST_URI'];
-        $this->assign('aside', $aside);
-        $this->assign('active', $active);
-        $active = $_SERVER['REQUEST_URI'];
-        $this->assign('aside', $aside);
-        $this->assign('active', $active);
+        $this->db = D('apply');
     }
 
     /**
-     * 客户案列
+     * 客户留言
      */
     public function index()
     {
-        $where = 'catid = 4 and status = 1';
-        $count = M("news")->where($where)->count();
-        $page = $this->page($count, 10);
-        $list = M("news")->where($where)->order(array("listorder" => "asc", "edittime" => "desc"))->limit($page->firstRow . ',' . $page->listRows)->select();
-        $this->assign("page", $page->show('Home'));
-        $this->assign('list', $list);
-        $webconfig = $this->webConfig("",'4');
-        $this->assign('webconfig', $webconfig);
-        $this->display();
-    }
-
-    /**
-     * 客户采访
-     */
-    public function vist()
-    {
-        $where = 'catid = 5 and status = 1';
-        $count = M("news")->where($where)->count();
-        $page = $this->page($count, 10);
-        $list = M("news")->where($where)->order(array("listorder" => "asc", "edittime" => "desc"))->limit($page->firstRow . ',' . $page->listRows)->select();
-        $this->assign("page", $page->show('Home'));
-        $this->assign('list', $list);
-        $webconfig = $this->webConfig("",'5');
-        $this->assign('webconfig', $webconfig);
-        $this->display();
-    }
-
-    /**
-     * 新闻详情
-     * @param $catid
-     * @return string
-     */
-    public function detail()
-    {
-        $nid = $_GET['id'];
-        $where = "nid = '$nid'";
-        $info = $this->news->where($where)->find();
-        $cate = null;
-        if ($info) {
-            $detail = $this->ncontent->where($where)->find();
-            $cate = $this->catdb->where("cate_id='{$info['catid']}'")->find();
-            if ($detail) $info = array_merge($info, $detail);
-        } else {
-            $this->error("内容不存在或已删！");
+        $code = $this->_post("checkcode");
+        if (isset($code)) {
+            if ($code != $_SESSION['code']) {
+                $this->error("验证码错误!");
+            }
+            $data = array();
+            $data['name'] = $this->_post("Guest_Name");
+            $data['tel'] = $this->_post("Guest_TEL");
+            $data['email'] = $this->_post("Guest_Email");
+            $data['fax'] = $this->_post("Guest_FAX");
+            $data['address'] = $this->_post("Guest_ADD");
+            $data['zip'] = $this->_post("Guest_ZIP");
+            $data['content'] = $this->_post("Content");
+            $data['company'] = $this->_post("Company");
+            $data['add_time'] = date('Y-m-d H:i:s',time());
+            $this->db->add($data);
+            $this->success("提交成功!");
+            exit();
         }
-        $webconfig = $this->webConfig($info,'');
-        $this->assign('webconfig', $webconfig);
-        $this->assign('cate', $cate);
-        $this->assign('detail', $info);
         $this->display();
     }
 }

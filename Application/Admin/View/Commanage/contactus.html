@@ -21,12 +21,14 @@
                 <div style="display: block;" class="ibox-content">
                     <form novalidate="novalidate" class="form-horizontal m-t" id="myform" action="" method="post">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">地址</label>
+                            <label class="col-sm-2 control-label">联系人</label>
                             <div class="col-sm-10  control" style="margin-bottom: 20px;">
-                                <input type="text" name="address" id="address" class="form-control"
-                                       value="{$info.address}">
+                                <input type="text" name="linkman" id="linkman" class="form-control" value="{$info.linkman}">
                             </div>
-
+                            <label class="col-sm-2 control-label">手机</label>
+                            <div class="col-sm-10  control" style="margin-bottom: 20px;">
+                                <input type="text" name="mobile" id="mobile" class="form-control" value="{$info.mobile}">
+                            </div>
                             <label class="col-sm-2 control-label">电话</label>
                             <div class="col-sm-10  control" style="margin-bottom: 20px;">
                                 <input type="text" name="phone" id="phone" class="form-control" value="{$info.phone}">
@@ -44,7 +46,15 @@
                             <div class="col-sm-10  control" style="margin-bottom: 20px;">
                                 <input type="email" name="email" id="email" class="form-control" value="{$info.email}">
                             </div>
-
+                            <label class="col-sm-2 control-label">淘宝商铺</label>
+                            <div class="col-sm-10  control" style="margin-bottom: 20px;">
+                                <input type="text" name="tbshop" id="tbshop" class="form-control" value="{$info.tbshop}">
+                            </div>
+                            <label class="col-sm-2 control-label">地址</label>
+                            <div class="col-sm-10  control" style="margin-bottom: 20px;">
+                                <input type="text" name="address" id="address" class="form-control"
+                                       value="{$info.address}">
+                            </div>
                             <div id="parterlogo">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label"

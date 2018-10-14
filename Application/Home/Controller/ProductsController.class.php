@@ -17,21 +17,30 @@ class ProductsController extends BaseController
     function _initialize()
     {
         parent::_initialize();
-        $this->News = M("news");
+        $this->News = M("products");
+        $this->Newscat = M("products_cat");
         $this->ncontent = M ( 'ncontent' );
-        //左侧导航-课程体系
-        $aside = $this->News->field('title as cate_name,nid')->where("catid = '3' and status='1'")->order(array("listorder" => "asc","edittime" => "desc"))->select();
-        foreach ($aside as $k =>$v){
-            $aside[$k]['url'] = '/lesson/detail/id/'.$v['nid'].'.html';
-        }
-        $title = array("cate_name"=>'课程体系',"url"=>'');
-        array_unshift($aside,$title);
-        $active = $_SERVER['REQUEST_URI'];
-        $this->assign('aside',$aside);
-        $this->assign('active',$active);
     }
     public function index()
     {
+        $catid = $this->_get("cid");
+        $title= "产品展示";
+        $keyword = $this->_get("keyword");
+        $where = '1=1 and status=1 ';
+        if (!empty($keyword)) {
+            $where .= " and title like '%$keyword%'";
+        }
+        if (!empty($catid)) {
+            $where .= " and catid = '$catid'";
+            $info = $this->Newscat->where("cate_id = '{$catid}'")->find();
+            if($info && $info['cate_name']) $title=$info['cate_name'];
+        }
+        $count = M("products")->where($where)->count();
+        $page = $this->page($count, 15);
+        $list = M("products")->where($where)->order(array("listorder" => "asc", "addtime" => "desc"))->limit($page->firstRow . ',' . $page->listRows)->select();
+        $this->assign("page", $page->show('Admin'));
+        $this->assign('list', $list);
+        $this->assign('title', $title);
         $this->display();
     }
 

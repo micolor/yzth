@@ -148,6 +148,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <th width="80" style="color:#F00">是否推荐</th>
+                            <td>
+                                <input name="istj" type="radio" value="1"
+                                <php>if($info[istj]==1 || $act='add'){echo "checked";}</php>
+                                /> 推荐 &nbsp; &nbsp; &nbsp; &nbsp;
+                                <input name="istj" type="radio" value="2"
+                                <php>if($info[istj]==2){echo "checked";}</php>
+                                /> 不推荐
+                            </td>
+                        </tr>
+                        <tr>
                             <th>产品内容</th>
                             <td><textarea name='content' id="content" style="width:637px; height:500px; max-width:637px;resize:none;">{$info.content}</textarea>
                             </td>

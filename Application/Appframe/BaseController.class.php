@@ -24,10 +24,12 @@ class BaseController extends AppframeController
             $contact = F('Contact');
         }
         $this->assign('contact', $contact);
-        //案列见证
-        $where = "catid = '4' and status = '1'";
-        $case_left = M('news')->where($where)->order(array("listorder" => "asc", "edittime" => "desc"))->limit(2)->select();
-        $this->assign('case_left', $case_left);
+        //产品分类
+        $productcat = M('products_cat')->where("is_show='1'")->order("sort_order asc")->select();
+        $this->assign('productcat', $productcat);
+        //轮播广告
+        $banner = M("ads")->where('ad_adp_id=1 and ad_status=1')->order("ad_order asc")->select();
+        $this->assign('banner', $banner);
     }
 
     protected function page($Total_Size = 1, $Page_Size = 0, $Current_Page = 1, $listRows = 6, $PageParam = '', $PageLink = '', $Static = FALSE)
@@ -63,7 +65,7 @@ class BaseController extends AppframeController
         }else if($catId){
             $info = M("newcat")->where("cate_id = '" . $catId . "'")->find();
             if ($info) {
-                $webConfig['title'] = $info['cate_name'] . "-蒋春燕绩效工场";
+                $webConfig['title'] = $info['cate_name'] . "-扬州盛祥弹簧有限公司";
                 $webConfig['keywords'] = $info['category_keywords'];
                 $webConfig['ndesc'] = $info['category_desc'];
             }

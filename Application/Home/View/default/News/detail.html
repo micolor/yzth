@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Common:head"/>
+</head>
+<body>
+<div id="wrapper">
+    <include file="Common:header"/>
+    <div id="page_main" class="clearfix">
+        <div class="page-right">
+            <div class="site-nav">
+                <h3 class="site-title">{$detail.title}</h3>
+                <span>当前位置 : </span><a href="/">公司主页</a> &gt;&gt; <a href="/news" title="新闻资讯">新闻资讯</a>
+            </div>
+            <div class="page-single">
+                    {$detail.content}
+                    <div class="news-time" style=" text-align: right; line-height: 35px;">{$detail.edittime|date="Y/m/d H:i:s",###}</div>
+            </div>
+        </div>
+        <include file="Common:aside"/>
+    </div>
+    <include file="Common:footer"/>
+</div>
+</body>
+</html>

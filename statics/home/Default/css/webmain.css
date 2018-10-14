@@ -15,6 +15,7 @@ a:hover{color:#008aff;text-decoration:none}
 .page_list a:hover,.page_list a:active{border:#e1e6ed 1px solid;color:#000;background-color:#D3E1F6}
 .page_list span.current{border:#ddd 1px solid;padding:2px 5px;font-weight:bold;margin-right:2px;color:#FFF;background-color:#15428b}
 .page_list span.disabled{border:#f3f3f3 1px solid;padding:2px 5px;margin-right:2px;color:#CCC}
+.page_list li{display: inline}
 /* webcss start*/
 body{background:#f6f6f6 url(../images/body_bg.gif) top repeat-x}
 #wrapper{margin:0px auto;width:980px}
@@ -95,12 +96,13 @@ body{background:#f6f6f6 url(../images/body_bg.gif) top repeat-x}
 .left-contact p span{font-weight:bold}
 /* page-right */
 .page-right{float:right;padding:0px 15px 0px 10px;width:695px;overflow:hidden}
-.site-nav{background:url(../images/site_nav.gif) no-repeat left center;border-bottom:1px solid #CCC;height:30px;margin-bottom:10px;line-height:30px;text-align:right}
+.site-nav{border-bottom:1px solid #CCC;height:30px;margin-bottom:10px;line-height:30px;text-align:right}
 .site-nav span{color:#025dbf;font-weight:bold}
+.site-title{float:left; border-left: 4px solid #2260ad; margin: 2px 0; height: 25px; line-height: 25px; padding-left: 10px;font-size: 13px;}
 .page-single,.page-products,.page-news,.page-newsdetail,.page-jobs,.page-jobsdetail{margin-bottom:10px}
 .page-products ul li{float:left;width:230px;text-align:center;padding-bottom:5px}
 .page-products ul li a{cursor:pointer}
-.page-products ul li a span{display:block;width:230;height:24px;line-height:24px}
+.page-products ul li a span{display:block;width:230px;height:24px;line-height:24px;}
 .productsdetail-title,.newsdetail-title,.jobsdetail-title{font-size:14px;font-weight:bold;line-height:30px;text-align:center;border-bottom:1px dashed #CCC;margin-bottom:10px}
 .page-news table{width:98%;}
 .page-news table th{height:30px;line-height:30px;text-align:center;font-weight:bold;border:none 0px;font-size:12px}
@@ -124,5 +126,6 @@ body{background:#f6f6f6 url(../images/body_bg.gif) top repeat-x}
 #checkcode{width:60px;text-align:center}
 .page-guestbook p{text-align:center;clear:both;margin-bottom:10px}
 .page-guestbook p input{height:26px;width:100px;color:#FFF;background:#025dbf;cursor:pointer;border:none}
-
 #copyright{background:url(../images/copyright_bg.gif) repeat-x top;padding:15px 0px;text-align:center}
+.kf{position: relative;}
+.kf-phone{position: absolute;top: 28px;letter-spacing: 1px;left: 70px;color: #ffffff;font-size: 16px;}

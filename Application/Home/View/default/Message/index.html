@@ -10,19 +10,20 @@
     <include file="Common:header"/>
     <div id="page_main" class="clearfix">
         <div class="page-right">
-            <div class="site-nav"><span>当前位置 : </span><a href="index.html">公司主页</a> &gt;&gt; <a href="guestbook.html"
-                                                                                                title="留言反馈">留言反馈</a>
+            <h3 class="site-title">客户留言</h3>
+            <div class="site-nav"><span>当前位置 : </span><a href="/">公司主页</a> &gt;&gt; <a href="/message"
+                                                                                       title="客户留言">客户留言</a>
             </div>
             <div class="page-guestbook">
                 <script type="text/javascript">
                     function check() {
                         if (document.guestbook.Guest_Name.value == "") {
-                            alert("请填写您的姓名");
+                            alert("请填写联系人");
                             document.guestbook.Guest_Name.focus();
                             return false
                         }
-                        if (document.guestbook.Guest_Email.value == "") {
-                            alert("请填写邮件地址");
+                        if (document.guestbook.Guest_TEL.value == "") {
+                            alert("请填写电话");
                             document.guestbook.Guest_Email.focus();
                             return false
                         }
@@ -48,18 +49,19 @@
                             document.guestbook.checkcode.focus();
                             return false;
                         }
-
                         return true;
                     }
                 </script>
-                <form method="post" name="guestbook" id="guestbook" onSubmit="return check()">
+                <form action="/message" method="post" name="guestbook" id="guestbook" onSubmit="return check()">
                     <dl class="clearfix">
-                        <dt>您的姓名：</dt>
+                        <dt>联系人：</dt>
                         <dd><input name="Guest_Name" type="text" id="Guest_Name"/><span>*</span></dd>
-                        <dt>邮件地址：</dt>
-                        <dd><input name="Guest_Email" type="text" id="Guest_Email"/><span>*</span></dd>
                         <dt>电话：</dt>
-                        <dd><input name="Guest_TEL" type="text" id="Guest_TEL"/></dd>
+                        <dd><input name="Guest_TEL" type="text" id="Guest_TEL"/><span>*</span></dd>
+                        <dt>公司名称：</dt>
+                        <dd><input name="Company" type="text" id="Company"/><span>*</span></dd>
+                        <dt>邮件地址：</dt>
+                        <dd><input name="Guest_Email" type="text" id="Guest_Email"/></dd>
                         <dt>传真：</dt>
                         <dd><input name="Guest_FAX" type="text" id="Guest_FAX"/></dd>
                         <dt>地址：</dt>
@@ -69,11 +71,14 @@
                         <dt>留言内容：</dt>
                         <dd><textarea name="Content" cols="" rows="" class="Content" id="Content"></textarea></dd>
                         <dt>验证码：</dt>
-                        <dd><input name="checkcode" type="text" id="checkcode" maxlength="4" autocomplete="off"/><img
-                                src="images/getnum.gif" alt="点击刷新" align="absmiddle"
-                                style="cursor:pointer;"/><span>*</span></dd>
+                        <dd><input name="checkcode" type="text" id="checkcode" maxlength="4" autocomplete="off"/>
+                            <img title="点击刷新" src="/api.php" align="absbottom"
+                                 onclick="this.src='/api.php?'+Math.random();" style="height:28px; cursor: pointer;">
+                            <span>*</span></dd>
                     </dl>
-                    <p><input name="submit" type="submit" id="submit" value="提交信息"/></p>
+                    <p><br/>
+                        <br/>
+                        <input name="submit" type="submit" id="submit" value="提交信息"/></p>
                 </form>
             </div>
         </div>

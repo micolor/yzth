@@ -39,7 +39,7 @@ class ApplyController extends AdminbaseController
         $status = $this->_post('status');
         if ($id && $status) {
             $data['status'] = $status;
-            $data["updata_time"] = time();
+            $data["update_time"] = date("Y-m-d H:i:s",time());
             $status = $this->apply->where(" id = '$id' ")->save($data);
             if ($status) {
                 echo "ok";
@@ -75,5 +75,18 @@ class ApplyController extends AdminbaseController
             }
         }
     }
+
+    /**
+     * 查看详细
+     * @return bool|void
+     */
+    public function detail()
+    {
+        $id = $this->_get('id');
+        $detail= $this->apply->where(" id = '$id' ")->find();
+        $this->assign('detail',$detail);
+        $this->display();
+    }
+
 }
 

@@ -3,40 +3,43 @@
 /* * 项目扩展函数库 * Edit date：20120703
  * Author：旅行者
  */
-	function editor_safe_replace($content){
-	$tags = array(
-		"'<iframe[^>]*?>.*?</iframe>'is",
-		"'<frame[^>]*?>.*?</frame>'is",
-		"'<script[^>]*?>.*?</script>'is",
-		"'<head[^>]*?>.*?</head>'is",
-		"'<title[^>]*?>.*?</title>'is",
-		"'<meta[^>]*?>'is",
-		"'<link[^>]*?>'is",
-	);
-	return preg_replace($tags, "", $content);
+function editor_safe_replace($content)
+{
+    $tags = array(
+        "'<iframe[^>]*?>.*?</iframe>'is",
+        "'<frame[^>]*?>.*?</frame>'is",
+        "'<script[^>]*?>.*?</script>'is",
+        "'<head[^>]*?>.*?</head>'is",
+        "'<title[^>]*?>.*?</title>'is",
+        "'<meta[^>]*?>'is",
+        "'<link[^>]*?>'is",
+    );
+    return preg_replace($tags, "", $content);
 }
 
 /**
-	 * 检查管理员密码合法性
-	 * @param string $password 密码
-	 */
-	function checkpasswd($password){
-		if (!is_password($password)){
-			return false;
-		}
-		return true;
-	}
-	
+ * 检查管理员密码合法性
+ * @param string $password 密码
+ */
+function checkpasswd($password)
+{
+    if (!is_password($password)) {
+        return false;
+    }
+    return true;
+}
+
 /**
  * 检查密码长度是否符合规定
  *
  * @param STRING $password
- * @return 	TRUE or FALSE
+ * @return    TRUE or FALSE
  */
-function is_password($password) {
-	$strlen = strlen($password);
-	if($strlen >= 6 && $strlen <= 20) return true;
-	return false;
+function is_password($password)
+{
+    $strlen = strlen($password);
+    if ($strlen >= 6 && $strlen <= 20) return true;
+    return false;
 }
 
 /**
@@ -45,66 +48,73 @@ function is_password($password) {
  * @param $encrypt //传入加密串，在修改密码时做认证
  * @return array/password
  */
-function password($password, $encrypt='') {
-	$pwd = array();
-	$pwd['encrypt'] =  $encrypt ? $encrypt : create_randomstr();	
-	$pwd['password'] = md5(md5(trim($password)).$pwd['encrypt']);
-	return $encrypt ? $pwd['password'] : $pwd;
+function password($password, $encrypt = '')
+{
+    $pwd = array();
+    $pwd['encrypt'] = $encrypt ? $encrypt : create_randomstr();
+    $pwd['password'] = md5(md5(trim($password)) . $pwd['encrypt']);
+    return $encrypt ? $pwd['password'] : $pwd;
 }
+
 /**
  * 生成随机字符串
  * @param string $lenth 长度
  * @return string 字符串
  */
-function create_randomstr($lenth = 6) {
-	return random($lenth, '123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ');
+function create_randomstr($lenth = 6)
+{
+    return random($lenth, '123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ');
 }
+
 /**
-* 产生随机字符串
-*
-* @param    int        $length  输出长度 
-* @param    string     $chars   可选的 ，默认为 0123456789
-* @return   string     字符串
-*/
-function random($length, $chars = '0123456789') {
-	$hash = '';
-	$max = strlen($chars) - 1;
-	for($i = 0; $i < $length; $i++) {
-		$hash .= $chars[mt_rand(0, $max)];
-	}
-	return $hash;
+ * 产生随机字符串
+ *
+ * @param    int $length 输出长度
+ * @param    string $chars 可选的 ，默认为 0123456789
+ * @return   string     字符串
+ */
+function random($length, $chars = '0123456789')
+{
+    $hash = '';
+    $max = strlen($chars) - 1;
+    for ($i = 0; $i < $length; $i++) {
+        $hash .= $chars[mt_rand(0, $max)];
+    }
+    return $hash;
 }
 
 /**
  * 检查用户名是否符合规定
  *
  * @param STRING $username 要检查的用户名
- * @return 	TRUE or FALSE
+ * @return    TRUE or FALSE
  */
-function is_username($username) {
-	$strlen = strlen($username);
-	if(is_badword($username) || !preg_match("/^[a-zA-Z0-9_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+$/", $username)){
-		return false;
-	} elseif ( 20 <= $strlen || $strlen < 2 ) {
-		return false;
-	}
-	return true;
+function is_username($username)
+{
+    $strlen = strlen($username);
+    if (is_badword($username) || !preg_match("/^[a-zA-Z0-9_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+$/", $username)) {
+        return false;
+    } elseif (20 <= $strlen || $strlen < 2) {
+        return false;
+    }
+    return true;
 }
 
- /**
+/**
  * 检测输入中是否含有错误字符
  *
  * @param char $string 要检查的字符串名称
  * @return TRUE or FALSE
  */
-function is_badword($string) {
-	$badwords = array("\\",'&',' ',"'",'"','/','*',',','<','>',"\r","\t","\n","#");
-	foreach($badwords as $value){
-		if(strpos($string, $value) !== FALSE) {
-			return TRUE;
-		}
-	}
-	return FALSE;
+function is_badword($string)
+{
+    $badwords = array("\\", '&', ' ', "'", '"', '/', '*', ',', '<', '>', "\r", "\t", "\n", "#");
+    foreach ($badwords as $value) {
+        if (strpos($string, $value) !== FALSE) {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 
@@ -112,18 +122,15 @@ function is_badword($string) {
  * 判断email格式是否正确
  * @param $email
  */
-function is_email($email) {
-	return strlen($email) > 6 && preg_match("/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/", $email);
+function is_email($email)
+{
+    return strlen($email) > 6 && preg_match("/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/", $email);
 }
 
 
-
-
-
-
-
 // 调用接口服务
-function X($name, $params = array(), $domain = 'Service') {
+function X($name, $params = array(), $domain = 'Service')
+{
     //创建一个静态变量，用于缓存实例化的对象
     static $_service = array();
     $app = C('DEFAULT_APP');
@@ -144,12 +151,14 @@ function X($name, $params = array(), $domain = 'Service') {
 }
 
 // 实例化服务
-function service($name, $params = array()) {
+function service($name, $params = array())
+{
     return X($name, $params = array(), 'Service');
 }
 
 //调用TagLib类
-function TagLib($name, $params = array()) {
+function TagLib($name, $params = array())
+{
     return X($name, $params = array(), 'TagLib');
 }
 
@@ -162,63 +171,73 @@ function TagLib($name, $params = array()) {
  * @startlength  开始位置
  * @cutlength    截取长度
  */
-function truncate($sourcestr,$cutlength) 
-{ 
-    $startlength=0;
-	$returnstr=''; 
-	$i=0; 
-	$n=0; 
-	$str_length=strlen($sourcestr);            //字符串的字节数 
-	while (($n<$cutlength) and ($i<=$str_length))
-	{ 
-	$temp_str=substr($sourcestr,$i,1); 
-	$ascnum=Ord($temp_str);               //得到字符串中第$i位字符的ascii码 
-	if ($ascnum>=224) {                  //如果ASCII位高与224，
-	   $returnstr=$returnstr.substr($sourcestr,$i,3);  //根据UTF-8编码规范，将3个连续的字符计为单个字符         
-	   $i=$i+3;                           //实际Byte计为3
-	   $n++;                             //字串长度计1
-	} elseif ($ascnum>=192){              //如果ASCII位高与192，
-	   $returnstr=$returnstr.substr($sourcestr,$i,2);  //根据UTF-8编码规范，将2个连续的字符计为单个字符 
-	   $i=$i+2;                           //实际Byte计为2
-	   $n++;                            //字串长度计1
-	} elseif ($ascnum>=65 && $ascnum<=90){       //如果是大写字母，
-	   $returnstr=$returnstr.substr($sourcestr,$i,1); 
-	   $i=$i+1;                           //实际的Byte数仍计1个
-	   $n++;                            //但考虑整体美观，大写字母计成一个高位字符
-	} else {                              //其他情况下，包括小写字母和半角标点符号，
-	   $returnstr=$returnstr.substr($sourcestr,$i,1); 
-	   $i=$i+1;                           //实际的Byte数计1个
-	   $n=$n+0.5;                        //小写字母和半角标点等与半个高位字符宽...
-	} 
-	
-	if ($n <= $startlength){
-	  $returnstr = '';
-	  continue;
-	}
-	}
-	
-	if ($str_length>$cutlength){
-	 $returnstr = $returnstr . "...";          //超过长度时在尾处加上省略号
-	}
-	return $returnstr; 
- }
+function truncate($sourcestr, $cutlength)
+{
+    $startlength = 0;
+    $returnstr = '';
+    $i = 0;
+    $n = 0;
+    $str_length = strlen($sourcestr);            //字符串的字节数
+    while (($n < $cutlength) and ($i <= $str_length)) {
+        $temp_str = substr($sourcestr, $i, 1);
+        $ascnum = Ord($temp_str);               //得到字符串中第$i位字符的ascii码
+        if ($ascnum >= 224) {                  //如果ASCII位高与224，
+            $returnstr = $returnstr . substr($sourcestr, $i, 3);  //根据UTF-8编码规范，将3个连续的字符计为单个字符
+            $i = $i + 3;                           //实际Byte计为3
+            $n++;                             //字串长度计1
+        } elseif ($ascnum >= 192) {              //如果ASCII位高与192，
+            $returnstr = $returnstr . substr($sourcestr, $i, 2);  //根据UTF-8编码规范，将2个连续的字符计为单个字符
+            $i = $i + 2;                           //实际Byte计为2
+            $n++;                            //字串长度计1
+        } elseif ($ascnum >= 65 && $ascnum <= 90) {       //如果是大写字母，
+            $returnstr = $returnstr . substr($sourcestr, $i, 1);
+            $i = $i + 1;                           //实际的Byte数仍计1个
+            $n++;                            //但考虑整体美观，大写字母计成一个高位字符
+        } else {                              //其他情况下，包括小写字母和半角标点符号，
+            $returnstr = $returnstr . substr($sourcestr, $i, 1);
+            $i = $i + 1;                           //实际的Byte数计1个
+            $n = $n + 0.5;                        //小写字母和半角标点等与半个高位字符宽...
+        }
+
+        if ($n <= $startlength) {
+            $returnstr = '';
+            continue;
+        }
+    }
+
+    if ($str_length > $cutlength) {
+        $returnstr = $returnstr . "...";          //超过长度时在尾处加上省略号
+    }
+    return $returnstr;
+}
+
+function cut_string($string = "", $num = 20)
+{
+    if (mb_strlen($string, 'UTF8') > $num) {
+        $string = mb_substr($string, 0, $num, 'UTF8') . '...';
+    }
+    return $string;
+}
 
 /**
  * 取得文件扩展
- * 
+ *
  * @param $filename 文件名
  * @return 扩展名
  */
-function fileext($filename) {
+function fileext($filename)
+{
     return strtolower(trim(substr(strrchr($filename, '.'), 1, 10)));
 }
+
 /**
  * 安全过滤函数
  *
  * @param $string
  * @return string
  */
-function safe_replace($string) {
+function safe_replace($string)
+{
     $string = str_replace('%20', '', $string);
     $string = str_replace('%27', '', $string);
     $string = str_replace('%2527', '', $string);
@@ -239,7 +258,8 @@ function safe_replace($string) {
  * @param $string 需要处理的字符串或数组
  * @return mixed
  */
-function new_stripslashes($string) {
+function new_stripslashes($string)
+{
     if (!is_array($string))
         return stripslashes($string);
     foreach ($string as $key => $val)
@@ -252,7 +272,8 @@ function new_stripslashes($string) {
  * @param $string 需要处理的字符串或数组
  * @return mixed
  */
-function new_addslashes($string) {
+function new_addslashes($string)
+{
     if (!is_array($string))
         return addslashes($string);
     foreach ($string as $key => $val)
@@ -261,11 +282,12 @@ function new_addslashes($string) {
 }
 
 /**
- *  用于前台模板检测 
+ *  用于前台模板检测
  * @param type $templateFile
- * @return boolean|string 
+ * @return boolean|string
  */
-function parseTemplateFile($templateFile = '') {
+function parseTemplateFile($templateFile = '')
+{
     $config = F("Config");
     if ('' == $templateFile) {
         // 如果模板文件名为空 按照默认规则定位
@@ -294,11 +316,11 @@ function parseTemplateFile($templateFile = '') {
  * @param type $PageParam 分页参数
  * @param type $PageLink 分页链接
  * @param type $Static 是否(伪)静态
- * @return \Page 
+ * @return \Page
  * 其他说明 ：当开启静态的时候 $PageLink 传入的是数组，数组格式
-
  */
-function page($Total_Size = 1, $Page_Size = 0, $Current_Page = 1, $listRows = 6, $PageParam = '', $PageLink = '', $Static = FALSE, $TP = "") {
+function page($Total_Size = 1, $Page_Size = 0, $Current_Page = 1, $listRows = 6, $PageParam = '', $PageLink = '', $Static = FALSE, $TP = "")
+{
     static $_pageCache = array();
     $cacheIterateId = md5($Total_Size . $Page_Size . $Current_Page . $listRows . $PageParam);
     if (isset($_pageCache[$cacheIterateId]))
@@ -330,11 +352,12 @@ function page($Total_Size = 1, $Page_Size = 0, $Current_Page = 1, $listRows = 6,
 
 /**
  * 取得URL地址中域名部分
- * @param type $url 
+ * @param type $url
  * @return \url 返回域名
  */
-function urlDomain($url){
-    if(preg_match_all('#https?://(.*?)($|/)#m', $url, $Domain)){
+function urlDomain($url)
+{
+    if (preg_match_all('#https?://(.*?)($|/)#m', $url, $Domain)) {
         return $Domain[0][0];
     }
     return false;
@@ -342,65 +365,66 @@ function urlDomain($url){
 
 /**
  * 分页函数
- * 
+ *
  * @param $num 信息总数
  * @param $curr_page 当前分页
  * @param $pageurls 链接地址
  * @return 分页
  */
-function content_pages($num, $curr_page,$pageurls) {
+function content_pages($num, $curr_page, $pageurls)
+{
 
-	$multipage = '';
-	$page = 11;
-	$offset = 4;
-	$pages = $num;
-	$from = $curr_page - $offset;
-	$to = $curr_page + $offset;
-	$more = 0;
-	if($page >= $pages) {
-		$from = 2;
-		$to = $pages-1;
-	} else {
-		if($from <= 1) {
-			$to = $page-1;
-			$from = 2;
-		} elseif($to >= $pages) {
-			$from = $pages-($page-2);
-			$to = $pages-1;
-		}
-		$more = 1;
-	}
-	
-	if($curr_page>0) {
-		$perpage = $curr_page == 1 ? 1 : $curr_page-1;
-		if($curr_page!=1)$multipage .= '<a class="a1" href="'.$pageurls[$perpage][0].'">上一页</a>';
-		if($curr_page==1) {
-			$multipage .= ' <span>1</span>';
-		} elseif($curr_page>6 && $more) {
-			$multipage .= ' <a href="'.$pageurls[1][0].'">1</a>..';
-		} else {
-			$multipage .= ' <a href="'.$pageurls[1][0].'">1</a>';
-		}
-	}
-	for($i = $from; $i <= $to; $i++) {
-		if($i != $curr_page) {
-			$multipage .= ' <a href="'.$pageurls[$i][0].'">'.$i.'</a>';
-		} else {
-			$multipage .= ' <span>'.$i.'</span>';
-		}
-	}
-	if($curr_page<$pages) {
-		if($curr_page<$pages-5 && $more) {
-			$multipage .= ' ..<a href="'.$pageurls[$pages][0].'">'.$pages.'</a> <a class="a1" href="'.$pageurls[$curr_page+1][0].'">下一页</a>';
-		} else {
-			$multipage .= ' <a href="'.$pageurls[$pages][0].'">'.$pages.'</a> <a class="a1" href="'.$pageurls[$curr_page+1][0].'">下一页</a>';
-		}
-	} elseif($curr_page==$pages) {
-		//$multipage .= ' <span>'.$pages.'</span> <a class="a1" href="'.$pageurls[$curr_page][0].'">下一页</a>';
-		$multipage .= ' <span>'.$pages.'</span>';
-	}
-	
-	return $multipage;
+    $multipage = '';
+    $page = 11;
+    $offset = 4;
+    $pages = $num;
+    $from = $curr_page - $offset;
+    $to = $curr_page + $offset;
+    $more = 0;
+    if ($page >= $pages) {
+        $from = 2;
+        $to = $pages - 1;
+    } else {
+        if ($from <= 1) {
+            $to = $page - 1;
+            $from = 2;
+        } elseif ($to >= $pages) {
+            $from = $pages - ($page - 2);
+            $to = $pages - 1;
+        }
+        $more = 1;
+    }
+
+    if ($curr_page > 0) {
+        $perpage = $curr_page == 1 ? 1 : $curr_page - 1;
+        if ($curr_page != 1) $multipage .= '<a class="a1" href="' . $pageurls[$perpage][0] . '">上一页</a>';
+        if ($curr_page == 1) {
+            $multipage .= ' <span>1</span>';
+        } elseif ($curr_page > 6 && $more) {
+            $multipage .= ' <a href="' . $pageurls[1][0] . '">1</a>..';
+        } else {
+            $multipage .= ' <a href="' . $pageurls[1][0] . '">1</a>';
+        }
+    }
+    for ($i = $from; $i <= $to; $i++) {
+        if ($i != $curr_page) {
+            $multipage .= ' <a href="' . $pageurls[$i][0] . '">' . $i . '</a>';
+        } else {
+            $multipage .= ' <span>' . $i . '</span>';
+        }
+    }
+    if ($curr_page < $pages) {
+        if ($curr_page < $pages - 5 && $more) {
+            $multipage .= ' ..<a href="' . $pageurls[$pages][0] . '">' . $pages . '</a> <a class="a1" href="' . $pageurls[$curr_page + 1][0] . '">下一页</a>';
+        } else {
+            $multipage .= ' <a href="' . $pageurls[$pages][0] . '">' . $pages . '</a> <a class="a1" href="' . $pageurls[$curr_page + 1][0] . '">下一页</a>';
+        }
+    } elseif ($curr_page == $pages) {
+        //$multipage .= ' <span>'.$pages.'</span> <a class="a1" href="'.$pageurls[$curr_page][0].'">下一页</a>';
+        $multipage .= ' <span>' . $pages . '</span>';
+    }
+
+    return $multipage;
 }
 
 /**
@@ -409,57 +433,71 @@ function content_pages($num, $curr_page,$pageurls) {
  * @param $length
  * @param $dot
  */
-function str_cut($string, $length, $dot = '...') {
-	$charset='utf-8';
-	$strlen = strlen($string);
-	if($strlen <= $length) return $string;
-	$string = str_replace(array(' ','&nbsp;', '&amp;', '&quot;', '&#039;', '&ldquo;', '&rdquo;', '&mdash;', '&lt;', '&gt;', '&middot;', '&hellip;'), array('∵',' ', '&', '"', "'", '“', '”', '—', '<', '>', '·', '…'), $string);
-	$strcut = '';
-	if($charset == 'utf-8') {
-		$length = intval($length-strlen($dot)-$length/3);
-		$n = $tn = $noc = 0;
-		while($n < strlen($string)) {
-			$t = ord($string[$n]);
-			if($t == 9 || $t == 10 || (32 <= $t && $t <= 126)) {
-				$tn = 1; $n++; $noc++;
-			} elseif(194 <= $t && $t <= 223) {
-				$tn = 2; $n += 2; $noc += 2;
-			} elseif(224 <= $t && $t <= 239) {
-				$tn = 3; $n += 3; $noc += 2;
-			} elseif(240 <= $t && $t <= 247) {
-				$tn = 4; $n += 4; $noc += 2;
-			} elseif(248 <= $t && $t <= 251) {
-				$tn = 5; $n += 5; $noc += 2;
-			} elseif($t == 252 || $t == 253) {
-				$tn = 6; $n += 6; $noc += 2;
-			} else {
-				$n++;
-			}
-			if($noc >= $length) {
-				break;
-			}
-		}
-		if($noc > $length) {
-			$n -= $tn;
-		}
-		$strcut = substr($string, 0, $n);
-		$strcut = str_replace(array('∵', '&', '"', "'", '“', '”', '—', '<', '>', '·', '…'), array(' ', '&amp;', '&quot;', '&#039;', '&ldquo;', '&rdquo;', '&mdash;', '&lt;', '&gt;', '&middot;', '&hellip;'), $strcut);
-	} else {
-		$dotlen = strlen($dot);
-		$maxi = $length - $dotlen - 1;
-		$current_str = '';
-		$search_arr = array('&',' ', '"', "'", '“', '”', '—', '<', '>', '·', '…','∵');
-		$replace_arr = array('&amp;','&nbsp;', '&quot;', '&#039;', '&ldquo;', '&rdquo;', '&mdash;', '&lt;', '&gt;', '&middot;', '&hellip;',' ');
-		$search_flip = array_flip($search_arr);
-		for ($i = 0; $i < $maxi; $i++) {
-			$current_str = ord($string[$i]) > 127 ? $string[$i].$string[++$i] : $string[$i];
-			if (in_array($current_str, $search_arr)) {
-				$key = $search_flip[$current_str];
-				$current_str = str_replace($search_arr[$key], $replace_arr[$key], $current_str);
-			}
-			$strcut .= $current_str;
-		}
-	}
-	return $strcut.$dot;
+function str_cut($string, $length, $dot = '...')
+{
+    $charset = 'utf-8';
+    $strlen = strlen($string);
+    if ($strlen <= $length) return $string;
+    $string = str_replace(array(' ', '&nbsp;', '&amp;', '&quot;', '&#039;', '&ldquo;', '&rdquo;', '&mdash;', '&lt;', '&gt;', '&middot;', '&hellip;'), array('∵', ' ', '&', '"', "'", '“', '”', '—', '<', '>', '·', '…'), $string);
+    $strcut = '';
+    if ($charset == 'utf-8') {
+        $length = intval($length - strlen($dot) - $length / 3);
+        $n = $tn = $noc = 0;
+        while ($n < strlen($string)) {
+            $t = ord($string[$n]);
+            if ($t == 9 || $t == 10 || (32 <= $t && $t <= 126)) {
+                $tn = 1;
+                $n++;
+                $noc++;
+            } elseif (194 <= $t && $t <= 223) {
+                $tn = 2;
+                $n += 2;
+                $noc += 2;
+            } elseif (224 <= $t && $t <= 239) {
+                $tn = 3;
+                $n += 3;
+                $noc += 2;
+            } elseif (240 <= $t && $t <= 247) {
+                $tn = 4;
+                $n += 4;
+                $noc += 2;
+            } elseif (248 <= $t && $t <= 251) {
+                $tn = 5;
+                $n += 5;
+                $noc += 2;
+            } elseif ($t == 252 || $t == 253) {
+                $tn = 6;
+                $n += 6;
+                $noc += 2;
+            } else {
+                $n++;
+            }
+            if ($noc >= $length) {
+                break;
+            }
+        }
+        if ($noc > $length) {
+            $n -= $tn;
+        }
+        $strcut = substr($string, 0, $n);
+        $strcut = str_replace(array('∵', '&', '"', "'", '“', '”', '—', '<', '>', '·', '…'), array(' ', '&amp;', '&quot;', '&#039;', '&ldquo;', '&rdquo;', '&mdash;', '&lt;', '&gt;', '&middot;', '&hellip;'), $strcut);
+    } else {
+        $dotlen = strlen($dot);
+        $maxi = $length - $dotlen - 1;
+        $current_str = '';
+        $search_arr = array('&', ' ', '"', "'", '“', '”', '—', '<', '>', '·', '…', '∵');
+        $replace_arr = array('&amp;', '&nbsp;', '&quot;', '&#039;', '&ldquo;', '&rdquo;', '&mdash;', '&lt;', '&gt;', '&middot;', '&hellip;', ' ');
+        $search_flip = array_flip($search_arr);
+        for ($i = 0; $i < $maxi; $i++) {
+            $current_str = ord($string[$i]) > 127 ? $string[$i] . $string[++$i] : $string[$i];
+            if (in_array($current_str, $search_arr)) {
+                $key = $search_flip[$current_str];
+                $current_str = str_replace($search_arr[$key], $replace_arr[$key], $current_str);
+            }
+            $strcut .= $current_str;
+        }
+    }
+    return $strcut . $dot;
 }
+
 ?>

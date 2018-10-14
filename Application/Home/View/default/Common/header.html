@@ -6,25 +6,20 @@
 </div>
 <div id="MainMenu" class="ddsmoothmenu">
     <ul>
-        <li><a href="index.html" title="公司主页" id="menu_selected"><span>公司主页</span></a></li>
-        <li><a href="single.html" title="企业概况"><span>企业概况</span></a>
+        <li ><a <eq name="CONTROLLER_NAME" value="Index">id="menu_selected"</eq> href="/" title="公司主页"><span>公司主页{$Think.CONTROLLER_NAME}</span></a></li>
+        <li><a <eq name="CONTROLLER_NAME" value="Abouts">id="menu_selected"</eq> href="/abouts" title="公司简介"><span>公司简介</span></a></li>
+        <li><a <eq name="CONTROLLER_NAME" value="Products">id="menu_selected"</eq> href="/products" title="产品展示"><span>产品展示</span></a>
             <ul class="menulevel">
-                <li><a href="/abouts" title="公司历史">公司简介</a></li>
-                <li><a href="/links" title="联系我们">联系我们</a></li>
+                <volist name="productcat" id="vo">
+                    <li><a href="{:u('/products/index',array('cid'=>$vo['cate_id']))}" title="{$vo.cate_name}">{$vo.cate_name}</a></li>
+                </volist>
             </ul>
         </li>
-        <li><a href="/products" title="产品展示"><span>产品展示</span></a>
-            <ul class="menulevel">
-                <li><a href="products.html" title="医药原料及中间体">医药原料及中间体</a></li>
-                <li><a href="products.html" title="无机化工产品">无机化工产品</a></li>
-                <li><a href="products.html" title="香精香料及植物提取物">香精香料及植物提取物</a></li>
-                <li><a href="products.html" title="食品化工产品">食品化工产品</a></li>
-                <li><a href="products.html" title="有机化工产品">有机化工产品</a></li>
-                <li><a href="products.html" title="农资化工产品">农资化工产品</a></li>
-            </ul>
-        </li>
-        <li><a href="/news" title="新闻资讯"><span>新闻资讯</span></a></li>
-        <li><a href="/message" title="客户留言"><span>客户留言</span></a></li>
+        <li><a <eq name="CONTROLLER_NAME" value="Jscs">id="menu_selected"</eq> href="/jscs" title="技术参数"><span>技术参数</span></a></li>
+        <li><a <eq name="CONTROLLER_NAME" value="Scsb">id="menu_selected"</eq> href="/scsb" title="生产设备"><span>生产设备</span></a></li>
+        <li><a <eq name="CONTROLLER_NAME" value="Xswl">id="menu_selected"</eq> href="/xswl" title="销售网络"><span>销售网络</span></a></li>
+        <li><a <eq name="CONTROLLER_NAME" value="News">id="menu_selected"</eq> href="/news" title="新闻资讯"><span>新闻资讯</span></a></li>
+        <li><a <eq name="CONTROLLER_NAME" value="Message">id="menu_selected"</eq> href="/message" title="客户留言"><span>客户留言</span></a></li>
     </ul>
 </div>
 <script type="text/javascript">
@@ -46,10 +41,9 @@
     })
 </script>
 <div id="banner">
-    <a href="#"><img src="/statics/home/Default/images/banner01.jpg" alt="多年的经营过程中，不断优化货源渠道，使产品价格更具竞争力！" width="950"
-                     height="152"/></a>
-    <a href="#"><img src="/statics/home/Default/images/banner02.jpg" alt="多年的经营过程中，不断优化货源渠道，使产品价格更具竞争力！" width="950"
-                     height="152"/></a>
-    <a href="#"><img src="/statics/home/Default/images/banner03.jpg" alt="多年的经营过程中，不断优化货源渠道，使产品价格更具竞争力！" width="950"
-                     height="152"/></a>
+    <volist name="banner" id="vo">
+        <a target="_blank" href="{$vo.ad_link}"><img src="{$vo.ad_file}" alt="{$vo.ad_desc}" width="950"
+                         height="200"/></a>
+    </volist>
+
 </div>

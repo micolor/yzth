@@ -153,6 +153,7 @@ class ProductsController extends AdminbaseController
             $data['author'] = $this->_post('author');
             $data['address'] = $this->_post('address');
             $data['status'] = $this->_post('status');
+            $data['istj'] = $this->_post('istj');
             $data['hits'] = intval($this->_post('hits'));
             $data['thumb'] = $thumb;
             $data['addtime'] = $data['edittime'] = $addtime;
@@ -235,6 +236,7 @@ class ProductsController extends AdminbaseController
             $data['ndesc'] = $ndesc;
             $data['author'] = $this->_post('author');
             $data['address'] = $this->_post('address');
+            $data['istj'] = $this->_post('istj');
             $data['status'] = $this->_post('status');
             $data['hits'] = intval($this->_post('hits'));
             $data['thumb'] = $thumb;

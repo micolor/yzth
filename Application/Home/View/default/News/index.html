@@ -9,66 +9,20 @@
     <include file="Common:header"/>
     <div id="page_main" class="clearfix">
         <div class="page-right">
-            <div class="site-nav"><span>当前位置 : </span><a href="index.html">公司主页</a> &gt;&gt; <a href="news.html"
-                                                                                                title="新闻资讯">新闻资讯</a>
+            <h3 class="site-title">新闻资讯</h3>
+            <div class="site-nav"><span>当前位置 : </span><a href="/">公司主页</a> &gt;&gt; <a href="/news" title="新闻资讯">新闻资讯</a>
             </div>
             <div class="page-news">
                 <table border="0" align="center">
-                    <tr>
-                        <th class="news-time">日期</th>
-                        <th class="news-title">新闻标题</th>
-                    </tr>
-
-                    <tr>
-                        <td class="time-list"><span>2011/6/11</span></td>
-                        <td><a href="news.html" title="未来几年北美聚酯纤维需求快速增长">未来几年北美聚酯纤维需求快速增长</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="time-list"><span>2011/6/11</span></td>
-                        <td><a href="news.html" title="江苏化工企业接受环境风险全面排查">江苏化工企业接受环境风险全面排查</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="time-list"><span>2011/6/11</span></td>
-                        <td><a href="news.html" title="资源税飙升稀土价格面临再次上涨">资源税飙升稀土价格面临再次上涨</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="time-list"><span>2011/6/10</span></td>
-                        <td><a href="news.html" title="煤炭煤化工机会凸显">煤炭煤化工机会凸显</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="time-list"><span>2011/6/10</span></td>
-                        <td><a href="news.html" title="德国巴斯夫三峡库区化工项目开建在即">德国巴斯夫三峡库区化工项目开建在即</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="time-list"><span>2011/6/10</span></td>
-                        <td><a href="news.html" title="中国电力投资集团拟在新疆投资30亿">中国电力投资集团拟在新疆投资30亿</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="time-list"><span>2011/6/10</span></td>
-                        <td><a href="news.html" title="全球最大纤维素乙醇工厂投入运营">全球最大纤维素乙醇工厂投入运营</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="time-list"><span>2011/6/10</span></td>
-                        <td><a href="news.html" title="油气生产刺激油田化学品需求快增">油气生产刺激油田化学品需求快增</a></td>
-                    </tr>
-
-                    <tr>
-                        <td class="time-list"><span>2011/6/10</span></td>
-                        <td><a href="news.html" title="甲醇行业三大问题">甲醇行业三大问题</a></td>
-                    </tr>
+                    <volist name="list" id = "vo">
+                        <tr>
+                            <td width="10%" class="time-list"><span>{$vo.edittime|date="Y/m/d",###}</span></td>
+                            <td><a target="_blank" href="{:u('/news/detail',array('id'=>$vo['nid']))}" title="{$vo.title}">{$vo.title|cut_string = ###,45}</a></td>
+                        </tr>
+                    </volist>
                 </table>
                 <div class="page_list">
-                    <div class="list_info">共9个/1页 <span class="disabled">&nbsp;&lt;&lt;&nbsp;</span><span
-                            class="disabled">&nbsp;&lt;&nbsp;</span><span class="current">1</span><span
-                            class="disabled">&nbsp;&gt;&nbsp;</span><span class="disabled">&nbsp;&gt;&gt;&nbsp;</span>
-                    </div>
+                    {$page}
                 </div>
             </div>
         </div>

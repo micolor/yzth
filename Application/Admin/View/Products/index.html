@@ -80,6 +80,7 @@
 									<th>缩略图</th>
 									<th style=" width: 30%">名称</th>
 									<th>分类</th>
+									<th>是否推荐</th>
 									<th>是否发布</th>
 									<th>点击量</th>
 									<th>更新时间</th>
@@ -107,7 +108,13 @@
 										</td>
 										<td>{$vo.cate_name}</td>
 										<td>
-											<if condition="$vo['status'] eq 1">
+											<if condition="$vo['istj'] eq 1">
+												<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+												<else />
+												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+											</if></td>
+										<td>
+											<if condition="$vo['istj'] eq 1">
 												<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 												<else />
 												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
