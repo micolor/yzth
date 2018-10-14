@@ -1,0 +1,1 @@
+a:10:{s:8:"sitename";s:42:"扬州盛祥碟形弹簧制造有限公司";s:7:"siteurl";s:22:"http://www.yzsxth.com/";s:11:"sitefileurl";s:8:"/d/file/";s:8:"siteinfo";s:42:"扬州盛祥碟形弹簧制造有限公司";s:9:"mail_type";N;s:11:"smtp_server";s:0:"";s:9:"smtp_port";s:0:"";s:9:"smtp_mail";s:5:"admin";s:13:"smtp_password";s:6:"123456";s:9:"copyright";s:84:"Copyright©2018-2020 扬州盛祥碟形弹簧制造有限公司 All Rights Reserved.";}

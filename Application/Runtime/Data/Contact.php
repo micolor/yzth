@@ -1,0 +1,1 @@
+a:10:{s:7:"address";s:73:"扬州市邗江区开发区扬子江中路228号观湖国际A座16楼1612";s:5:"phone";s:13:"0514-87980327";s:3:"fax";s:13:"0514-87980327";s:5:"email";s:20:"geyupeng@micolor.net";s:2:"qq";s:9:"594405327";s:5:"thumb";s:39:"/imageuploads/thumb/1539350937.0612.jpg";s:7:"linkman";s:9:"许女士";s:6:"mobile";s:10:"1515151151";s:6:"tbshop";s:26:"shop1433350387097.1688.com";s:7:"addtime";i:1539410139;}

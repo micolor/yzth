@@ -1,0 +1,307 @@
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
+<html>
+<head>
+  <link rel="shortcut icon" href="favicon.ico">
+<link href="/statics/Hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/statics/Hplus/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="/statics/Hplus/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="/statics/Hplus/css/animate.css" rel="stylesheet">
+<link href="/statics/Hplus/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>修改合作伙伴</h5>
+          <div class="ibox-tools">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="<?php echo U('Partner/index');?>">返回合作伙伴</a>
+              </li>
+              </li>
+            </ul>
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+          <div style="display: block;" class="ibox-content">
+            <form novalidate="novalidate" class="form-horizontal m-t" id="myform" action="" method="post">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">伙伴名称</label>
+                <div class="col-sm-10  control">
+                  <input type="text" name="link_name" class="form-control" id="link_name" value="<?php echo ($detail["link_name"]); ?>">
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">链接地址</label>
+                <div class="col-sm-10  control">
+                  <input type="url" name="link_url" value="<?php echo ($detail["link_url"]); ?>" id="link_url" class="form-control" placeholder="以http://开头">
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">链接类型</label>
+                <div class="col-sm-10  control">
+
+                  <div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="urltype_wz">
+                    <input type="radio" style="position: absolute; opacity: 0;" value="1">
+                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                  </div><i></i>文字类型
+
+                  <div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="urltype_tp">
+                    <input type="radio" style="position: absolute; opacity: 0;" value="2">
+                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                  </div><i></i>图片类型
+
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+
+
+          <div style="display: none" id="parterlogo">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">伙伴logo</label>
+                <div class="col-sm-8">
+                  <div id="uploader">
+                    <!--用来存放item-->
+                    <div id="fileList" class="uploader-list">
+                      <?php if($detail[link_img]): ?><div class="file-item thumbnail">
+                          <img src="<?php echo ($detail["link_img"]); ?>">
+                        </div><?php endif; ?>
+                    </div>
+                    <input type="hidden" name="link_img" id="filepath" value="<?php echo ($detail["link_img"]); ?>">
+                    <div id="filePicker">选择图片</div>
+                  </div>
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+          </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-10  control">
+                  <div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="static_yes">
+                    <input type="radio" style="position: absolute; opacity: 0;" value="1" >
+                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                  </div><i></i>开启
+                  <div class="iradio_square-green" style="position: relative;margin-top: 5px;margin-left: 20px;" id="static_no">
+                    <input type="radio" style="position: absolute; opacity: 0;" value="2" >
+                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                  </div><i></i>关闭
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">排序</label>
+                <div class="col-sm-10  control">
+                  <input type="text" name="link_order" value="<?php echo ($detail["link_order"]); ?>" class="form-control">
+                </div>
+              </div>
+              <div class="hr-line-dashed"></div>
+
+              <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                  <input type="hidden" name="link_id" value="<?php echo ($detail["link_id"]); ?>" />
+                  <input type="hidden" id="link_static" name="link_static" value="<?php echo ($detail["link_static"]); ?>"/>
+                  <input type="hidden" id="link_type" name="link_type" value="<?php echo ($detail["link_type"]); ?>"/>
+                  <input name="dosubmit" type="submit" value="提交"  class="btn btn-primary" id="dosubmit">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- 全局js -->
+<script src="/statics/Hplus/js/jquery.min.js?v=2.1.4"></script>
+<script src="/statics/Hplus/js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="/statics/Hplus/js/content.js?v=1.0.0"></script>
+<!-- jQuery Validation plugin javascript-->
+<script src="/statics/Hplus/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="/statics/Hplus/js/plugins/validate/messages_zh.min.js"></script>
+<!-- iCheck -->
+<script src="/statics/Hplus/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
+<link href='/Public/uploader/webuploader.css' rel='stylesheet'>
+<script src="/Public/uploader/webuploader.js"></script>
+<style>
+  .thumbnail {
+    width: 190px;
+    height: 90px;
+    background: #F8F8F8;
+    border: 1px solid #C1C1C1;
+    margin-top: 12px;
+    line-height: 185px;
+    text-align: center
+  }
+
+  .thumbnail img {
+    width: 180px;
+    height: 80px;
+    margin-top: -2px;
+  }
+</style>
+</body>
+</html>
+<script>
+  $.validator.setDefaults({
+    highlight: function (element) {
+      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function (element) {
+      element.closest('.form-group').removeClass('has-error').addClass('has-success');
+    },
+    errorElement: "span",
+    errorPlacement: function (error, element) {
+      if (element.is(":radio") || element.is(":checkbox")) {
+        error.appendTo(element.parent().parent().parent());
+      } else {
+        error.appendTo(element.parent());
+      }
+    },
+    errorClass: "help-block m-b-none",
+    validClass: "help-block m-b-none"
+  });
+
+  $(function () {
+// validate signup form on keyup and submit
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#myform").validate({
+      rules: {
+        link_name:{
+          required: true,
+          minlength: 1
+        },
+        link_url:{
+          required: true,
+          minlength: 1
+        }
+      },
+      messages: {
+        link_name:{
+          required: icon + "请输入合作伙伴名称",
+          minlength: icon + "合作伙伴不能为空"
+        },
+        link_url: {
+          required: icon + "请输入链接地址",
+          minlength: icon + "链接地址不能为空"
+        }
+      }
+    });
+
+  });
+
+  $(function() {
+
+      var link_type = $("#link_type").val();
+      if (link_type == 1) {
+          $("#urltype_wz").addClass("checked");
+          $("#urltype_wz").find("input[type=radio]").attr("checked", "");
+      } else {
+          $("#urltype_tp").addClass("checked");
+          $("#urltype_tp").find("input[type=radio]").attr("checked", "");
+          $("#parterlogo").show();
+      }
+
+      var link_static = $("#link_static").val();
+      if (link_static == 1) {
+          $("#static_yes").addClass("checked");
+          $("#static_yes").find("input[type=radio]").attr("checked", "");
+      } else {
+          $("#static_no").addClass("checked");
+          $("#static_no").find("input[type=radio]").attr("checked", "");
+      }
+
+      $("#urltype_wz").click(function () {
+          $(this).addClass("checked");
+          $(this).find("input[type=radio]").attr("checked", "checked");
+
+          $("#urltype_tp").removeClass("checked");
+          $("#urltype_tp").find("input[type=radio]").removeAttr("checked");
+          $("#parterlogo").hide();
+          $("#link_type").val(1);
+
+      });
+
+      $("#urltype_tp").click(function () {
+          $(this).addClass("checked");
+          $(this).find("input[type=radio]").attr("checked", "checked");
+
+          $("#urltype_wz").removeClass("checked");
+          $("#urltype_wz").find("input[type=radio]").removeAttr("checked");
+          $("#parterlogo").show();
+          $("#link_type").val(2);
+      });
+
+      $("#static_yes").click(function () {
+          $(this).addClass("checked");
+          $(this).find("input[type=radio]").attr("checked", "checked");
+
+          $("#static_no").removeClass("checked");
+          $("#static_no").find("input[type=radio]").removeAttr("checked");
+          $("#link_static").val(1);
+      });
+
+      $("#static_no").click(function () {
+          $(this).addClass("checked");
+          $(this).find("input[type=radio]").attr("checked", "checked");
+
+          $("#static_yes").removeClass("checked");
+          $("#static_yes").find("input[type=radio]").removeAttr("checked");
+          $("#link_static").val(2);
+      });
+
+      var uploader = WebUploader.create({
+          auto: true,
+          // swf文件路径
+          swf: '/Public/uploader/Uploader.swf',
+          // 文件接收服务端。
+          server: '/Admin/Fileuploade/ajax_upload.html',
+          // 选择文件的按钮。可选。
+          // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+          pick: '#filePicker',
+          // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+          resize: false,
+          multiple: false,
+          duplicate: true,
+          // 只允许选择图片文件。
+          accept: {
+              title: 'Images',
+              extensions: 'gif,jpg,jpeg,bmp,png',
+              mimeTypes: 'image/*'
+          }
+      });
+      uploader.on('uploadSuccess', function (file, data) {
+          var $li = $(
+              '<div class="file-item thumbnail">' +
+              '<img src="' + data.src + '">' +
+              '</div>'
+          )
+          $("#fileList").html($li);
+          $("#filepath").val(data.src);
+      });
+      uploader.on('uploadError', function (file) {
+          alert('上传出错');
+      });
+  })
+</script>
