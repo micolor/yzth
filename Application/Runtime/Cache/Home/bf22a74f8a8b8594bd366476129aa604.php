@@ -13,7 +13,8 @@
 <link href="/statics/home/Default/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="/statics/home/Default/css/webmain.css" rel="stylesheet" type="text/css" />
 <link href="/statics/home/Default/css/ddsmoothmenu.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/statics/home/Default/scripts/jquery-1.4.2.min.js"></script>
+<link href="/statics/home/Default/kf/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/statics/home/Default/kf/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/statics/home/Default/scripts/jquery.KinSlideshow-1.2.1.js"></script>
 <script type="text/javascript" src="/statics/home/Default/scripts/webtry_roll.js"></script>
 <script type="text/javascript" src="/statics/home/Default/scripts/ddsmoothmenu.js"></script>
@@ -30,25 +31,29 @@
 <body>
 <div id="wrapper">
     <div class="top">
-    <img src="/statics/home/Default/images/logo.gif" height="90" alt="上海网聚化工有限公司"/>
-    <div id="lang"><a
-            href="javascript:if(confirm('只有企业版才有多语言功能，请点击确定访问netgather.com咨询。')){location.href='http://www.netgather.com'}"><img
-            src="/statics/home/Default/images/gb.gif" width="16" height="11" alt="English"/>English</a></div>
+    <a href="/">
+        <img src="/statics/home/Default/images/logo.png" style="height: 80px; margin-left: 2%; padding-top: 8px;" alt="<?php echo ($config["sitename"]); ?>"/>
+    </a>
+    <div id="lang" style="padding-top: 20px;">
+        <p style="padding-left: 34px; font-size: 12px; color: #666666;letter-spacing: 4px;">全国销售热线电话</p>
+        <a href="javascript:void(0)"  style="font-size: 14px; color:#dd2201; font-weight:600
+        ; letter-spacing: 1px;">
+            <img src="/statics/home/Default/images/phone.png"  style="width: 25px; margin-top: -21px; padding-right: 5px;" alt="服务热线"/><?php echo ($contact["phone"]); ?></a></div>
 </div>
 <div id="MainMenu" class="ddsmoothmenu">
     <ul>
-        <li ><a <?php if((CONTROLLER_NAME) == "index"): ?>id="menu_selected"<?php endif; ?> href="/" title="公司主页"><span>公司主页<?php echo (CONTROLLER_NAME); ?></span></a></li>
-        <li><a <?php if((CONTROLLER_NAME) == "abouts"): ?>id="menu_selected"<?php endif; ?> href="/abouts" title="公司简介"><span>公司简介</span></a></li>
-        <li><a <?php if((ACTION_NAME) == "products"): ?>id="menu_selected"<?php endif; ?> href="/products" title="产品展示"><span>产品展示</span></a>
+        <li ><a <?php if((CONTROLLER_NAME) == "Index"): ?>id="menu_selected"<?php endif; ?> href="/" title="公司主页"><span>公司主页</span></a></li>
+        <li><a <?php if((CONTROLLER_NAME) == "Abouts"): ?>id="menu_selected"<?php endif; ?> href="/abouts" title="公司简介"><span>公司简介</span></a></li>
+        <li><a <?php if((CONTROLLER_NAME) == "Products"): ?>id="menu_selected"<?php endif; ?> href="/products" title="产品展示"><span>产品展示</span></a>
             <ul class="menulevel">
-                <?php if(is_array($productcat)): $i = 0; $__LIST__ = $productcat;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><a href="<?php echo U('/products',array('id'=>$vo['nid']));?>" title="<?php echo ($vo["cate_name"]); ?>"><?php echo ($vo["cate_name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                <?php if(is_array($productcat)): $i = 0; $__LIST__ = $productcat;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><a href="<?php echo u('/products/index',array('cid'=>$vo['cate_id']));?>" title="<?php echo ($vo["cate_name"]); ?>"><?php echo ($vo["cate_name"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
             </ul>
         </li>
-        <li><a <?php if((ACTION_NAME) == "jscs"): ?>id="menu_selected"<?php endif; ?> href="/jscs" title="技术参数"><span>技术参数</span></a></li>
-        <li><a <?php if((ACTION_NAME) == "scsb"): ?>id="menu_selected"<?php endif; ?> href="/scsb" title="生产设备"><span>生产设备</span></a></li>
-        <li><a <?php if((ACTION_NAME) == "xswl"): ?>id="menu_selected"<?php endif; ?> href="/xswl" title="销售网络"><span>销售网络</span></a></li>
-        <li><a <?php if((ACTION_NAME) == "news"): ?>id="menu_selected"<?php endif; ?> href="/news" title="新闻资讯"><span>新闻资讯</span></a></li>
-        <li><a <?php if((ACTION_NAME) == "message"): ?>id="menu_selected"<?php endif; ?> href="/message" title="客户留言"><span>客户留言</span></a></li>
+        <li><a <?php if((CONTROLLER_NAME) == "Jscs"): ?>id="menu_selected"<?php endif; ?> href="/jscs" title="技术参数"><span>技术参数</span></a></li>
+        <li><a <?php if((CONTROLLER_NAME) == "Scsb"): ?>id="menu_selected"<?php endif; ?> href="/scsb" title="生产设备"><span>生产设备</span></a></li>
+        <li><a <?php if((CONTROLLER_NAME) == "Xswl"): ?>id="menu_selected"<?php endif; ?> href="/xswl" title="销售网络"><span>销售网络</span></a></li>
+        <li><a <?php if((CONTROLLER_NAME) == "News"): ?>id="menu_selected"<?php endif; ?> href="/news" title="新闻资讯"><span>新闻资讯</span></a></li>
+        <li><a <?php if((CONTROLLER_NAME) == "Message"): ?>id="menu_selected"<?php endif; ?> href="/message" title="客户留言"><span>客户留言</span></a></li>
     </ul>
 </div>
 <script type="text/javascript">
@@ -131,7 +136,7 @@
         <h2><span>产品展示</span></h2>
         <div id="LeftMenu" class="ddsmoothmenu-v">
             <ul>
-                <?php if(is_array($productcat)): $i = 0; $__LIST__ = $productcat;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><a href="<?php echo u('/products/index',array('cid'=>$vo['cate_id']));?>" title="<?php echo ($vo["cate_name"]); ?>"><span><?php echo ($vo["cate_name"]); ?></span></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+                <?php if(is_array($productcat)): $i = 0; $__LIST__ = $productcat;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><a <?php if($vo['cate_id'] == $_GET['cid']): ?>id="menu_selected"<?php endif; ?>href="<?php echo u('/products/index',array('cid'=>$vo['cate_id']));?>" title="<?php echo ($vo["cate_name"]); ?>"><span><?php echo ($vo["cate_name"]); ?></span></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
             </ul>
         </div>
         <script type="text/javascript">
@@ -176,7 +181,7 @@
     </div>
     <div class="kf">
     <div class="kf-phone"><?php echo ($contact['phone']); ?></div>
-    <img src="/statics/home/default/images/tel.gif" width="240" height="59" alt="联系我们"/>
+    <img src="/statics/home/Default/images/tel.gif" width="240" height="59" alt="联系我们"/>
     </div>
 </div>
 <script>
@@ -196,6 +201,69 @@
     <?php echo ($config["copyright"]); ?><br/>
     <span>地址: </span> <?php echo ($contact["address"]); ?>
 </div>
+<div class="suspension">
+    <div class="suspension-box">
+        <a href="#" class="a a-service "><i class="i"></i></a>
+        <a href="javascript:;" class="a a-service-phone "><i class="i"></i></a>
+        <a href="javascript:;" class="a a-top"><i class="i"></i></a>
+        <div class="d d-service">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <div class="d-service-item clearfix">
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=<?php echo ($contact["qq"]); ?>&site=qq&menu=yes" class="clearfix"><span class="circle"><i class="i-qq"></i></span><h3>咨询在线客服</h3></a>
+                </div>
+            </div>
+        </div>
+        <div class="d d-service-phone">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <div class="d-service-item clearfix">
+                    <span class="circle"><i class="i-tel"></i></span>
+                    <div class="text">
+                        <p>服务热线</p>
+                        <p class="red number"><?php echo ($contact["phone"]); ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        /* ----- 侧边悬浮 ---- */
+        $(document).on("mouseenter", ".suspension .a", function(){
+            var _this = $(this);
+            var s = $(".suspension");
+            var isService = _this.hasClass("a-service");
+            var isServicePhone = _this.hasClass("a-service-phone");
+            var isQrcode = _this.hasClass("a-qrcode");
+            if(isService){ s.find(".d-service").show().siblings(".d").hide();}
+            if(isServicePhone){ s.find(".d-service-phone").show().siblings(".d").hide();}
+            if(isQrcode){ s.find(".d-qrcode").show().siblings(".d").hide();}
+        });
+        $(document).on("mouseleave", ".suspension, .suspension .a-top", function(){
+            $(".suspension").find(".d").hide();
+        });
+        $(document).on("mouseenter", ".suspension .a-top", function(){
+            $(".suspension").find(".d").hide();
+        });
+        $(document).on("click", ".suspension .a-top", function(){
+            $("html,body").animate({scrollTop: 0});
+        });
+        $(window).scroll(function(){
+            var st = $(document).scrollTop();
+            var $top = $(".suspension .a-top");
+            if(st > 100){
+                $top.css({display: 'block'});
+            }else{
+                if ($top.is(":visible")) {
+                    $top.hide();
+                }
+            }
+        });
+
+    });
+</script>
 </div>
 </body>
 </html>

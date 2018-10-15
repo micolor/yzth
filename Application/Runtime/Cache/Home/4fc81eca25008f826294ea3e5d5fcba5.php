@@ -14,7 +14,8 @@
 <link href="/statics/home/Default/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="/statics/home/Default/css/webmain.css" rel="stylesheet" type="text/css" />
 <link href="/statics/home/Default/css/ddsmoothmenu.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/statics/home/Default/scripts/jquery-1.4.2.min.js"></script>
+<link href="/statics/home/Default/kf/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/statics/home/Default/kf/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/statics/home/Default/scripts/jquery.KinSlideshow-1.2.1.js"></script>
 <script type="text/javascript" src="/statics/home/Default/scripts/webtry_roll.js"></script>
 <script type="text/javascript" src="/statics/home/Default/scripts/ddsmoothmenu.js"></script>
@@ -38,7 +39,7 @@
 </div>
 <div id="MainMenu" class="ddsmoothmenu">
     <ul>
-        <li ><a <?php if((CONTROLLER_NAME) == "Index"): ?>id="menu_selected"<?php endif; ?> href="/" title="公司主页"><span>公司主页<?php echo (CONTROLLER_NAME); ?></span></a></li>
+        <li ><a <?php if((CONTROLLER_NAME) == "Index"): ?>id="menu_selected"<?php endif; ?> href="/" title="公司主页"><span>公司主页</span></a></li>
         <li><a <?php if((CONTROLLER_NAME) == "Abouts"): ?>id="menu_selected"<?php endif; ?> href="/abouts" title="公司简介"><span>公司简介</span></a></li>
         <li><a <?php if((CONTROLLER_NAME) == "Products"): ?>id="menu_selected"<?php endif; ?> href="/products" title="产品展示"><span>产品展示</span></a>
             <ul class="menulevel">
@@ -135,7 +136,7 @@
     </div>
     <div class="kf">
     <div class="kf-phone"><?php echo ($contact['phone']); ?></div>
-    <img src="/statics/home/default/images/tel.gif" width="240" height="59" alt="联系我们"/>
+    <img src="/statics/home/Default/images/tel.gif" width="240" height="59" alt="联系我们"/>
     </div>
 </div>
 <script>
@@ -154,6 +155,69 @@
     <?php echo ($config["copyright"]); ?><br/>
     <span>地址: </span> <?php echo ($contact["address"]); ?>
 </div>
+<div class="suspension">
+    <div class="suspension-box">
+        <a href="#" class="a a-service "><i class="i"></i></a>
+        <a href="javascript:;" class="a a-service-phone "><i class="i"></i></a>
+        <a href="javascript:;" class="a a-top"><i class="i"></i></a>
+        <div class="d d-service">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <div class="d-service-item clearfix">
+                    <a href="#" class="clearfix"><span class="circle"><i class="i-qq"></i></span><h3>咨询在线客服</h3></a>
+                </div>
+            </div>
+        </div>
+        <div class="d d-service-phone">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <div class="d-service-item clearfix">
+                    <span class="circle"><i class="i-tel"></i></span>
+                    <div class="text">
+                        <p>服务热线</p>
+                        <p class="red number">4001-123-456</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        /* ----- 侧边悬浮 ---- */
+        $(document).on("mouseenter", ".suspension .a", function(){
+            var _this = $(this);
+            var s = $(".suspension");
+            var isService = _this.hasClass("a-service");
+            var isServicePhone = _this.hasClass("a-service-phone");
+            var isQrcode = _this.hasClass("a-qrcode");
+            if(isService){ s.find(".d-service").show().siblings(".d").hide();}
+            if(isServicePhone){ s.find(".d-service-phone").show().siblings(".d").hide();}
+            if(isQrcode){ s.find(".d-qrcode").show().siblings(".d").hide();}
+        });
+        $(document).on("mouseleave", ".suspension, .suspension .a-top", function(){
+            $(".suspension").find(".d").hide();
+        });
+        $(document).on("mouseenter", ".suspension .a-top", function(){
+            $(".suspension").find(".d").hide();
+        });
+        $(document).on("click", ".suspension .a-top", function(){
+            $("html,body").animate({scrollTop: 0});
+        });
+        $(window).scroll(function(){
+            var st = $(document).scrollTop();
+            var $top = $(".suspension .a-top");
+            if(st > 400){
+                $top.css({display: 'block'});
+            }else{
+                if ($top.is(":visible")) {
+                    $top.hide();
+                }
+            }
+        });
+
+    });
+</script>
 </div>
 </body>
 </html>
