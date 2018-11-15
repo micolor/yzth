@@ -66,31 +66,30 @@
     
     - HTML5默认 type 为 text/css 和 text/javascript 类型，所以没必要指定。即便是老浏览器也是支持的。
     
-    ######代码示例
-    ```bash
-    <!-- 不推荐 -->
-     <link rel="stylesheet" href="//www.google.com/css/maia.css"
-           type="text/css">
-     <script src="//www.google.com/js/gweb/analytics/autotrack.js"
-             type="text/javascript"></script>
-     <!-- 推荐 -->
-     <link rel="stylesheet" href="//www.google.com/css/maia.css">
-     <script src="//www.google.com/js/gweb/analytics/autotrack.js"></script>
-    ```
-    ---
-    <BR/>
+        ######代码示例
+        ```bash
+        <!-- 不推荐 -->
+         <link rel="stylesheet" href="//www.google.com/css/maia.css"
+               type="text/css">
+         <script src="//www.google.com/js/gweb/analytics/autotrack.js"
+                 type="text/javascript"></script>
+         <!-- 推荐 -->
+         <link rel="stylesheet" href="//www.google.com/css/maia.css">
+         <script src="//www.google.com/js/gweb/analytics/autotrack.js"></script>
+        ```
+        ---
+        <BR/>
 
-    - 格式规范 ps：禁止看到参差不齐的格式。<br>
+- 格式规范 ps：禁止看到参差不齐的格式。<br>
     
-        1、HTML格式
-        - 每个块元素、列表元素或表格元素都独占一行，每个子元素都相对于父元素进行缩进。
-        
-        - 独立元素的样式，将块元素、列表元素或表格元素都放在新行。
-        
-        - 另外，需要缩进块元素、列表元素或表格元素的子元素。
+    1、HTML格式
+    - 每个块元素、列表元素或表格元素都独占一行，每个子元素都相对于父元素进行缩进。
     
-            ######代码示例
-            ```bash
+    - 独立元素的样式，将块元素、列表元素或表格元素都放在新行。
+    
+    - 另外，需要缩进块元素、列表元素或表格元素的子元素。
+     ######代码示例
+     ```bash
              <!-- 不推荐 -->
             <section>
                  <div class=""></div>
@@ -109,17 +108,16 @@
                    <em></em>
                </div>
             </section>
-            ```
-      2、CSS格式
+     ```
+  2、CSS格式
         
-        - 依字母顺序进行声明。
-        
-        - 都按字母顺序声明，很容易记住和维护。
-        
-        - 忽略浏览器的特定前缀排序，但多浏览器特定的某个CSS属性前缀应相对保持排序（例如-moz前缀在-webkit前面）。
-        
-            ######代码示例
-            ```bash
+    - 依字母顺序进行声明。
+    
+    - 都按字母顺序声明，很容易记住和维护。
+    
+    - 忽略浏览器的特定前缀排序，但多浏览器特定的某个CSS属性前缀应相对保持排序（例如-moz前缀在-webkit前面）。
+      ######代码示例
+      ```bash
              background: fuchsia;
              border: 1px solid;
              -moz-border-radius: 4px;
@@ -128,57 +126,57 @@
              color: black;
              text-align: center;
              text-indent: 2em;
-             ```
+      ```
     - 代码块内容缩进，它能够提高层次结构的清晰度。
-    ```bash
-    @media screen, projection {
-       html {
-           background: #fff;
-           color: #444;
-       }
-    }
-    ```
+        ```bash
+                @media screen, projection {
+                   html {
+                       background: #fff;
+                       color: #444;
+                   }
+                }
+        ```
     
     - 声明完结，所有声明都要用“;”结尾。
-    ```bash
-     /* 不推荐 */
-     .test {
-         display: block;
-         height: 100px
-     }
-     /* 推荐 */
-     .test {
-         display: block;
-         height: 100px;
-    }
-    ```
+        ```bash
+             /* 不推荐 */
+             .test {
+                 display: block;
+                 height: 100px
+             }
+             /* 推荐 */
+             .test {
+                 display: block;
+                 height: 100px;
+            }
+        ```
     
     - 选择器和声明分行，每个选择器和声明都要独立新行。
-    ```bash
-      /* 不推荐 */
-      a:focus, a:active {
-          position: relative;
-          top: 1px;
-      }
-      /* 推荐 */
-      h1,
-      h2,
-      h3 {
-         font-weight: normal;
-         line-height: 1.2;
-      }
-     ```
+        ```bash
+              /* 不推荐 */
+              a:focus, a:active {
+                  position: relative;
+                  top: 1px;
+              }
+              /* 推荐 */
+              h1,
+              h2,
+              h3 {
+                 font-weight: normal;
+                 line-height: 1.2;
+              }
+         ```
     - 规则分行，每个规则独立一行，两个规则之间隔行
-    ```bash
-     html {
-         background: #fff;
-     }
-    
-     body {
-         margin: auto;
-         width: 50%;
-     }
-     ```
+        ```bash
+             html {
+                 background: #fff;
+             }
+            
+             body {
+                 margin: auto;
+                 width: 50%;
+             }
+         ```
 - 命名规范：严禁特简化命名。
     #####1、 ID和class的命名
 
@@ -372,22 +370,22 @@
     
         ######代码示例
         ```bash
-        function Student(name) {
-            var _name = name; // 私有成员
-        
-            // 公共方法
-            this.getName = function () {
-                return _name;
+            function Student(name) {
+                var _name = name; // 私有成员
+            
+                // 公共方法
+                this.getName = function () {
+                    return _name;
+                }
+            
+                // 公共方式
+                this.setName = function (value) {
+                    _name = value;
+                }
             }
-        
-            // 公共方式
-            this.setName = function (value) {
-                _name = value;
-            }
-        }
-        var st = new Student('tom');
-        st.setName('jerry');
-        console.log(st.getName()); // => jerry：输出_name私有变量的值
+            var st = new Student('tom');
+            st.setName('jerry');
+            console.log(st.getName()); // => jerry：输出_name私有变量的值
         ```
 
 ##注释
